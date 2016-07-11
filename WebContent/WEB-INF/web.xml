@@ -12,32 +12,6 @@
   </welcome-file-list> 
   <servlet>
     <description></description>
-    <display-name>Login</display-name>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>misServlets.Login</servlet-class>
-    <init-param>
-      <param-name>nombreAdmin</param-name>
-      <param-value>admin</param-value>
-    </init-param>
-    <init-param>
-      <param-name>claveAdmin</param-name>
-      <param-value>admin</param-value>
-    </init-param>
-    <init-param>
-      <param-name>nombreUsuario</param-name>
-      <param-value>usuario</param-value>
-    </init-param>
-    <init-param>
-      <param-name>claveUsuario</param-name>
-      <param-value>usuario</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Login</servlet-name>
-    <url-pattern>/Login</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>PruebaPersistencia</display-name>
     <servlet-name>PruebaPersistencia</servlet-name>
     <servlet-class>pruebas.PruebaPersistencia</servlet-class>
@@ -63,8 +37,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
-<!--<url-pattern>/faces/*</url-pattern> -->
- <url-pattern>*.xhtml</url-pattern>
+ 	<url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   <context-param>
     <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
