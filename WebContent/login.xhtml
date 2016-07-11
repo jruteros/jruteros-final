@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	template="/WEB-INF/facelets/templates/defaultVista.xhtml">
+	
+	<ui:define name="menu">
+		<ui:include src="menuPublic.xhtml" />
+	</ui:define>
+	<ui:define name="contenido">
+		<div id="login">
+
+				<h2>
+					<span class="fontawesome-lock"></span>Login
+				</h2>
+
+				<form id="formu" method="post" action="Login">
+					<fieldset>
+
+
+						<label for="nombreUsuario">Nombre de usuario</label>
+
+						<p>
+							<input type="text" id="nombreUsuario" name="nombre" />
+						</p>
+
+
+						<label for="clave">Clave</label>
+
+						<p>
+							<input type="password" id="clave" name="clave" />
+						</p>
+
+						<p>
+							<input type="submit" value="Login">
+						</p>
+
+					</fieldset>
+
+				</form>
+
+			</div>
+	</ui:define>
+</ui:composition>
