@@ -24,8 +24,7 @@
 		<div id="content">
 			<div class="container">
 
-				<table id="grid-data-api" class="table table-striped"
-					data-toggle="bootgrid">
+				<table id="grid-data-api" class="table table-striped" data-toggle="bootgrid">
 					<thead>
 						<tr>
 							<th data-column-id="nombreUsuario" data-order="asc">Nombre

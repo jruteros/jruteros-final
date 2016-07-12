@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 @Entity
 @DiscriminatorValue("usuario")
 public class Usuario extends Perfil{
-	
+	private boolean habilitado;
 	@OneToMany(mappedBy="usuario")
 	private Collection<Ruta> misRutas;
 
@@ -22,6 +22,7 @@ public class Usuario extends Perfil{
 	public Usuario(String nombre, String apellido, String nombreUsuario, String email
 			, String clave, Integer dni, String domicilio, Sexo sexo) {
 		super(nombre, apellido, nombreUsuario, email, clave, dni, domicilio, sexo);
+		this.setHabilitado(true);
 		this.setMisRutas(new ArrayList<Ruta>());
 		this.setMisPuntajes(new ArrayList<Puntaje>());
 	}
@@ -57,5 +58,13 @@ public class Usuario extends Perfil{
 	public void agregarRutaSubida(Ruta ruta) {
 		this.getMisRutas().add(ruta);
 		System.out.println(this.getMisRutas().size());
+	}
+
+	public boolean isHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(boolean habilitado) {
+		this.habilitado = habilitado;
 	}
 }
