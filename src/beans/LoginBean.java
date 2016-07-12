@@ -1,5 +1,8 @@
 package beans;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import misClases.Perfil;
 import servicios.LoginService;
 
@@ -17,7 +20,13 @@ public class LoginBean {
 		perfil.setClave(password);
 		perfil.setNombreUsuario(username);
 		LoginService login = new LoginService();
-		return login.login(perfil);
+		String ret = login.login(perfil);
+		if (ret == null) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			FacesMessage errorUserPassword = new FacesMessage("Usuario o contraseña incorrecta");
+			context.addMessage("formu", errorUserPassword);
+		}
+		return ret;
 	}
 
 	public String getUsername() {

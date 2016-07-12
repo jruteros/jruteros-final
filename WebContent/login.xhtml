@@ -13,21 +13,21 @@
 				<h2>
 					<span class="fontawesome-lock"></span>Login
 				</h2>
-				<h:form>
-					<h:form id="formu"> 
-						<h:message for="formu"/> <br /> 
-						<h:outputLabel id="labelUsername" for="username" value="Usuario" /> 
-						<h:inputText id="username" value="#{LoginBean.username}" required="true" >
-							<f:validateLength maximum="64" minimum="3" /> 
-						</h:inputText> 
-						<h:message for="username" /><br /> 
-						<h:outputLabel id="labelPassword" for="password" value="Contraseña" /> 
-						<h:inputSecret id="password" value="#{LoginBean.password}" required="true"> 
-							<f:validateLength maximum="64" minimum="3" /> 
-						</h:inputSecret>
-						<h:message for="password" /><br />
-						<h:commandButton id="submit" action="#{LoginBean.login}" value="Enviar" />
-						</h:form> 
+				<h:form id="formu">
+				<fieldset> 
+					<h:message for="formu" /> <br />
+					<h:outputLabel id="labelUsername" for="username" value="Usuario" /> 
+					<h:inputText id="username" value="#{LoginBean.username}" required="true" >
+						<f:validateLength maximum="64" minimum="3" /> 
+					</h:inputText> 
+					<h:message for="username" /><br /> 
+					<h:outputLabel id="labelPassword" for="password" value="Contraseña" /> 
+					<h:inputSecret id="password" value="#{LoginBean.password}" required="true"> 
+						<f:validateLength maximum="64" minimum="3" /> 
+					</h:inputSecret>
+					<h:message for="password" /><br />
+					<h:commandButton id="submit" action="#{LoginBean.login}" value="Enviar" />
+				</fieldset>
 				</h:form>
 			</div>
 	</ui:define>
