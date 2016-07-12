@@ -32,7 +32,6 @@ public class LoginService implements ILoginService{
 					Administrador a = DAOFactory.getAdministradorDAO().recuperar(p.getId_perfil());
 					session.put("usuario", a);
 					session.put("menu", "menuAdmin.xhtml");
-					System.out.println("paso por acaaaa");
 					return "LoginAdministrador";
 				}
 			}
