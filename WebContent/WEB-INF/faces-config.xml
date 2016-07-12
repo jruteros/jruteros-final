@@ -14,7 +14,7 @@
 		</navigation-case> 
 		<navigation-case> 
 			<from-outcome>LoginAdministrador</from-outcome> 
-			<to-view-id>/administradorAdminUsuarios.xhtml</to-view-id>
+			<to-view-id>/administradorHome.xhtml</to-view-id>
 			<redirect></redirect> 
 		</navigation-case>
 		<navigation-case> 
