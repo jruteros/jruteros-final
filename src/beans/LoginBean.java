@@ -5,6 +5,7 @@ import javax.faces.context.FacesContext;
 
 import misClases.Perfil;
 import servicios.LoginService;
+import servicios.LogoutService;
 
 public class LoginBean {
 	
@@ -27,6 +28,12 @@ public class LoginBean {
 			context.addMessage("formu", errorUserPassword);
 		}
 		return ret;
+	}
+	
+	public String logout() {
+		LogoutService logout = new LogoutService();
+		logout.logout();
+		return "Logout";
 	}
 
 	public String getUsername() {

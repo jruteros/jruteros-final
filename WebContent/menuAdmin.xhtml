@@ -1,4 +1,5 @@
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:h="http://xmlns.jcp.org/jsf/html">
 	<nav id="w0" class="navbar-inverse navbar-top navbar" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -14,7 +15,11 @@
 			    <li><a href="administradorAdminUsuarios.jsp">Administracion Usuarios</a></li>
 				<li><a href="#estadisticas">Estadísticas</a></li>
 				<li><a href="administradorAdminActividades.jsp">Administracion de Actividades</a></li>
-				<li><a href="index.jsp">Cerrar sesión</a></li>
+				<li>
+				<h:form>
+					<h:commandLink id="submit" action="#{LoginBean.logout}" value="Cerrar Sesión" />
+				</h:form>
+				</li>
 				</ul>
 			</div>
 		</div>

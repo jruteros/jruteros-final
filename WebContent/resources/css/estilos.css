@@ -142,9 +142,23 @@ input[type="radio"], input[type="checkbox"] {
 	border: none;
 }
 
-.navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-nav>li>form>a {
 	color: #FFFFFF;
 	font-weight: bold;
+}
+
+/* .navbar-inverse .navbar-nav>li>form>a {
+	color: #FFFFFF;
+	font-weight: bold;
+} */
+.navbar-inverse .navbar-nav > li > form > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.nav > li > form > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
 }
 
 .navbar-inverse .navbar-nav>.active>a {
