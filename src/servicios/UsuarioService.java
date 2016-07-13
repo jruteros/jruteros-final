@@ -8,7 +8,7 @@ import misClases.Usuario;
 import clasesUtiles.DAOFactory;
 
 public class UsuarioService implements IUsuarioService{
-
+	
 	@Override
 	public Usuario alta(Usuario entidad) throws Exception {
 		UsuarioDAO userDao = DAOFactory.getUsuarioDAO();
@@ -34,6 +34,21 @@ public class UsuarioService implements IUsuarioService{
 	public List<Usuario> recuperarTodos() {
 		UsuarioDAO userDao = DAOFactory.getUsuarioDAO();
 		return userDao.recuperarTodos();
+	}
+
+	public void habilitarUsuario(Usuario usuario) {
+		UsuarioDAO userDao = DAOFactory.getUsuarioDAO();
+		usuario.setHabilitado(true);
+		userDao.actualizar(usuario);
+		
+	}
+
+	public void deshabilitarUsuario(Usuario usuario) {
+		UsuarioDAO userDao = DAOFactory.getUsuarioDAO();
+		usuario.setHabilitado(false);
+		System.out.println(usuario.getApellido());
+		userDao.actualizar(usuario);
+		
 	}
 
 	

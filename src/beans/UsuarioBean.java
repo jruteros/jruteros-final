@@ -5,22 +5,35 @@ import interfacesDAO.UsuarioDAO;
 import java.util.List;
 
 import servicios.UsuarioService;
-import clasesUtiles.DAOFactory;
 import misClases.Usuario;
 
 public class UsuarioBean {
 
 	private UsuarioService usuarioService = new UsuarioService();
-	private Usuario usuario = new Usuario();
+	private Usuario usuario;
 	private List<Usuario> listaUsuarios;
 
 	public UsuarioBean() {
 		listaUsuarios = usuarioService.recuperarTodos();
 	}
 
-	public String listarUsuarios() {
+	/*public String listarUsuarios() {
 		listaUsuarios = usuarioService.recuperarTodos();
 		return "administradorAdminUsuarios.xhtml?faces-redirect=true";
+	}*/
+	
+	public String verMas(Usuario usuario){
+		this.usuario=usuario;
+     	return "administradorVerMas.xhtml?faces-redirect=true";
+//	    return "verMas";
+	}
+	
+	public void habilitar (Usuario usuario){
+		usuarioService.habilitarUsuario(usuario);
+	}
+	
+	public void deshabilitar (Usuario usuario){
+		usuarioService.deshabilitarUsuario(usuario);
 	}
 
 	public UsuarioService getUsuarioService() {

@@ -32,6 +32,15 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule> 
+		<from-view-id>/administradorAdminUsuarios.xhtml</from-view-id> 
+		<navigation-case> 
+			<from-outcome>verMas</from-outcome> 
+			<to-view-id>/administradorVerMas.xhtml</to-view-id> 
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+	
 	<managed-bean> 
 		<description>Login Bean</description> 
 		<managed-bean-name>LoginBean</managed-bean-name> 
@@ -42,6 +51,6 @@
 		<description>Usuario Bean</description> 
 		<managed-bean-name>UsuarioBean</managed-bean-name> 
 		<managed-bean-class>beans.UsuarioBean</managed-bean-class> 
-		<managed-bean-scope>view</managed-bean-scope> 
+		<managed-bean-scope>session</managed-bean-scope> 
 	</managed-bean>
 </faces-config>

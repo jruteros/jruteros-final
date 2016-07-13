@@ -31,12 +31,29 @@
 						<td><h:outputText value="#{u.apellido}"/></td>
 						<td>
 						<h:form>
-							<h:commandLink id="submit" action="#{UsuarioBean.ver}" value="Ver+" />
+							<h:commandLink id="submit" action="#{UsuarioBean.verMas(u)}" value="Ver+" />
 						</h:form>
 						</td>
-						<td>-</td>
-						<td><a href="#" onclick="alert('Usuario Deshabilitado!')">Deshabilitar</a>
-						</td>
+						<c:if test="${u.habilitado eq 'true'}">
+							<td><h:outputText value="-"/></td>
+						</c:if>
+						<c:if test="${u.habilitado eq 'false'}">
+							<td>
+							<h:form>
+							<h:commandLink id="submit" action="#{UsuarioBean.habilitar(u)}" value="Habilitar" />
+							</h:form>
+							</td>
+						</c:if>
+						<c:if test="${u.habilitado eq 'true'}">
+							<td>
+							<h:form>
+							<h:commandLink id="submit" action="#{UsuarioBean.deshabilitar(u)}" value="Deshabilitar" />
+							</h:form>
+							</td>
+						</c:if>
+						<c:if test="${u.habilitado eq 'false'}">
+							<td><h:outputText value="-"/></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
