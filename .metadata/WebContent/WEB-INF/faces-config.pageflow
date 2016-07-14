@@ -3,12 +3,14 @@
   <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="370" id="pf14682827706310" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" outlinks="pf14682827706331 pf14682827706342 pf14683796857980" inlinks="pf14682827706342" path="/login.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="misrutas.xhtml" x="338" y="178" id="pf14682827706354" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14682827706331" path="/misrutas.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="administradorHome.xhtml" x="122" y="754" id="pf14682827706355" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" path="/administradorHome.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="administradorAdminUsuarios.xhtml" x="338" y="562" id="pf14683796858031" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf14683796857980" path="/administradorAdminUsuarios.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="administradorAdminUsuarios.xhtml" x="338" y="562" id="pf14683796858031" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14684578168460" inlinks="pf14683796857980" path="/administradorAdminUsuarios.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="1138" id="pf14683796858032" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14683796858033" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="1138" id="pf14683796858034" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14683796858033" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="administradorVerMas.xhtml" x="554" y="562" id="pf14684578168471" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14684578168460" path="/administradorVerMas.xhtml"/>
   <links id="pf14682827706331" target="pf14682827706354" source="pf14682827706310" outcome="LoginUsuario" redirect="true"/>
   <links id="pf14683796857980" target="pf14683796858031" source="pf14682827706310" outcome="LoginAdministrador" redirect="true"/>
   <links id="pf14683796858033" target="pf14683796858034" source="pf14683796858032" outcome="Logout" redirect="true"/>
+  <links id="pf14684578168460" target="pf14684578168471" source="pf14683796858031" outcome="verMas" redirect="true"/>
   <links id="pf14682827706342" target="pf14682827706310" source="pf14682827706310">
     <bendPoints d1Height="-36" d2Height="-36"/>
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>

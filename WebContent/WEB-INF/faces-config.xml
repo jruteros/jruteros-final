@@ -51,7 +51,7 @@
 		<description>Usuario Bean</description> 
 		<managed-bean-name>UsuarioBean</managed-bean-name> 
 		<managed-bean-class>beans.UsuarioBean</managed-bean-class> 
-		<managed-bean-scope>view</managed-bean-scope> 
+		<managed-bean-scope>request</managed-bean-scope> 
 	</managed-bean>
 	<managed-bean> 
 		<description>Registrar Bean</description> 
