@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	template="/WEB-INF/facelets/templates/defaultVista.xhtml">
+	
+	<ui:define name="menu">
+		<ui:include src="#{menu}" />
+	</ui:define>
+	<ui:define name="contenido">
+		
+		<div id="login">
+				<h2>
+					<span class="fontawesome-lock"></span> Detalle del Usuario	</h2>
+				<h:form id="formu">
+				<fieldset> 
+					<h:outputLabel id="labelUsername" for="username" value="Username:" /> 
+					<h:inputText id="username" value="#{UsuarioBean.usuario.nombreUsuario}" disabled="true"> </h:inputText> 
+					<h:outputLabel id="labelNombre" for="nombre" value="Nombre:" /> 
+					<h:inputText id="nombre" value="#{UsuarioBean.usuario.nombre}" disabled="true"> </h:inputText>
+					<h:outputLabel id="labelApellido" for="apellido" value="Apellido:" /> 
+					<h:inputText id="apellido" value="#{UsuarioBean.usuario.apellido}" disabled="true"> </h:inputText>
+					<h:outputLabel id="labelDomicilio" for="domicilio" value="Domicilio:" /> 
+					<h:inputText id="domicilio" value="#{UsuarioBean.usuario.domicilio}" disabled="true"> </h:inputText>
+					<h:outputLabel id="labelEmail" for="email" value="Email:" /> 
+					<h:inputText id="email" value="#{UsuarioBean.usuario.email}" disabled="true"> </h:inputText>
+					<h:outputLabel id="labelDni" for="dni" value="DNI:" /> 
+					<h:inputText id="dni" value="#{UsuarioBean.usuario.dni}" disabled="true"> </h:inputText>
+					<h:outputLabel id="labelSexo" for="sexo" value="Sexo:" /> 
+					<h:inputText id="sexo" value="#{UsuarioBean.usuario.sexo.genero}" disabled="true"> </h:inputText>
+					<h:outputLabel id="labelHabilitado" for="habilitado" value="Habilitado:" /> 
+					<h:inputText id="habilitado" value="#{UsuarioBean.usuario.habilitado}" disabled="true"> </h:inputText>
+					<a href="administradorAdminUsuarios.xhtml" class="btn btn-default" >Volver</a>
+				</fieldset>
+				</h:form>
+			</div>
+	</ui:define>
+</ui:composition>

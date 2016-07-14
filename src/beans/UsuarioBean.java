@@ -22,6 +22,7 @@ public class UsuarioBean {
 	
 	public String verMas(Usuario usuario){
 		this.usuario = usuario;
+		System.out.println(usuario.getNombreUsuario());
      	return "administradorVerMas.xhtml";
 	}
 	
