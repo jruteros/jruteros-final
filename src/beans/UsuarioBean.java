@@ -1,7 +1,5 @@
 package beans;
 
-import interfacesDAO.UsuarioDAO;
-
 import java.util.List;
 
 import servicios.UsuarioService;
@@ -10,8 +8,8 @@ import misClases.Usuario;
 public class UsuarioBean {
 
 	private UsuarioService usuarioService = new UsuarioService();
-	private Usuario usuario;
 	private List<Usuario> listaUsuarios;
+	private Usuario usuario;
 
 	public UsuarioBean() {
 		listaUsuarios = usuarioService.recuperarTodos();
@@ -23,9 +21,8 @@ public class UsuarioBean {
 	}*/
 	
 	public String verMas(Usuario usuario){
-		this.usuario=usuario;
-     	return "administradorVerMas.xhtml?faces-redirect=true";
-//	    return "verMas";
+		this.usuario = usuario;
+     	return "administradorVerMas.xhtml";
 	}
 	
 	public void habilitar (Usuario usuario){
@@ -44,19 +41,19 @@ public class UsuarioBean {
 		this.usuarioService = usuarioService;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	public List<Usuario> getListaUsuarios() {
 		return listaUsuarios;
 	}
 
 	public void setListaUsuarios(List<Usuario> listaUsuarios) {
 		this.listaUsuarios = listaUsuarios;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

@@ -40,15 +40,18 @@ public class UsuarioService implements IUsuarioService{
 		UsuarioDAO userDao = DAOFactory.getUsuarioDAO();
 		usuario.setHabilitado(true);
 		userDao.actualizar(usuario);
-		
 	}
 
 	public void deshabilitarUsuario(Usuario usuario) {
 		UsuarioDAO userDao = DAOFactory.getUsuarioDAO();
 		usuario.setHabilitado(false);
 		System.out.println(usuario.getApellido());
-		userDao.actualizar(usuario);
-		
+		userDao.actualizar(usuario);	
+	}
+	
+	public Usuario recuperar(Long id) {
+		UsuarioDAO userDao = DAOFactory.getUsuarioDAO();
+		return userDao.recuperar(id);	
 	}
 
 	

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	template="/WEB-INF/facelets/templates/defaultVista.xhtml">
+	
+	<ui:define name="menu">
+		<ui:include src="menuPublic.xhtml" />
+	</ui:define>
+	<ui:define name="contenido">
+		<div id="login">
+			<h2>
+				<span class="fontawesome-lock"></span>Registrarse
+			</h2>
+			<h:form id="formu">
+				<fieldset>
+					<div>
+						<h:message for="formu" />
+					</div>
+					
+					<h:outputLabel id="labelNombreUsuario" for="nombreUsuario">Nombre de usuario:</h:outputLabel>
+					<h:inputText id="nombreUsuario" required="true" value="#{RegistrarBean.usuario.nombreUsuario}" label="Nombre de usuario">
+						<f:validateLength maximum="64" minimum="6"/>
+					</h:inputText>
+					<div>
+						<h:message for="nombreUsuario" />
+					</div>
+					
+					<h:outputLabel id="labelEmail" for="email">Email:</h:outputLabel>
+					<h:inputText id="email" required="true" value="#{RegistrarBean.usuario.email}" label="Email">
+						<!-- <f:validateRegex /> -->
+					</h:inputText>
+					<div>
+						<h:message for="email" />
+					</div>
+
+					<h:outputLabel id="labelNombre" for="nombre">Nombre:</h:outputLabel>
+					<h:inputText id="nombre" required="true" value="#{RegistrarBean.usuario.nombre}" label="Nombre">
+						<!-- <f:validateRegex /> -->
+					</h:inputText>
+					<div>
+						<h:message for="nombre" />
+					</div>
+					
+					<h:outputLabel id="labelApellido" for="apellido">Apellido:</h:outputLabel>
+					<h:inputText id="apellido" required="true" value="#{RegistrarBean.usuario.apellido}" label="Apellido">
+						<!-- <f:validateRegex /> -->
+					</h:inputText>
+					<div>
+						<h:message for="apellido" />
+					</div>
+					
+					<h:outputLabel id="labelDni" for="dni">DNI:</h:outputLabel>
+					<h:inputText id="dni" required="true" value="#{RegistrarBean.usuario.dni}" label="Dni">
+						<!-- <f:validateRegex /> -->
+					</h:inputText>
+					<div>
+						<h:message for="dni" />
+					</div>
+					
+					<h:outputLabel id="labelDomicilio" for="domicilio">Domicilio:</h:outputLabel>
+					<h:inputText id="domicilio" required="true" value="#{RegistrarBean.usuario.domicilio}" label="Domicilio">
+						<!-- <f:validateRegex /> -->
+					</h:inputText>
+					<div>
+						<h:message for="domicilio" />
+					</div>
+					
+					<h:commandButton action="#{RegistrarBean.registrar}" value="Registrarse" />
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

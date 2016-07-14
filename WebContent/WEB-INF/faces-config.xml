@@ -51,6 +51,18 @@
 		<description>Usuario Bean</description> 
 		<managed-bean-name>UsuarioBean</managed-bean-name> 
 		<managed-bean-class>beans.UsuarioBean</managed-bean-class> 
-		<managed-bean-scope>session</managed-bean-scope> 
+		<managed-bean-scope>view</managed-bean-scope> 
+	</managed-bean>
+	<managed-bean> 
+		<description>Registrar Bean</description> 
+		<managed-bean-name>RegistrarBean</managed-bean-name> 
+		<managed-bean-class>beans.RegistrarBean</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope> 
+	</managed-bean>
+	<managed-bean> 
+	<description>Recuperar Usuario Bean</description> 
+		<managed-bean-name>RecuperarUsuarioBean</managed-bean-name> 
+		<managed-bean-class>beans.RecuperarUsuarioBean</managed-bean-class> 
+		<managed-bean-scope>view</managed-bean-scope> 
 	</managed-bean>
 </faces-config>

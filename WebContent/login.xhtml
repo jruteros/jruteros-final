@@ -15,17 +15,21 @@
 				</h2>
 				<h:form id="formu">
 				<fieldset> 
-					<h:message for="formu" /> <br />
-					<h:outputLabel id="labelUsername" for="username" value="Usuario" /> 
-					<h:inputText id="username" value="#{LoginBean.username}" required="true" >
+					<h:message for="formu" />
+					<h:outputLabel id="labelUsername" for="username" value="Usuario" />
+					<h:inputText id="username" value="#{LoginBean.username}" required="true" label="Usuario" >
 						<f:validateLength maximum="64" minimum="3" /> 
 					</h:inputText> 
-					<h:message for="username" /><br /> 
+					<div>
+					<h:message for="username" />
+					</div> 
 					<h:outputLabel id="labelPassword" for="password" value="Contraseña" /> 
-					<h:inputSecret id="password" value="#{LoginBean.password}" required="true"> 
-						<f:validateLength maximum="64" minimum="3" /> 
+					<h:inputSecret id="password" value="#{LoginBean.password}" required="true" label="Contraseña"> 
+						<f:validateLength for="password" maximum="64" minimum="3" /> 
 					</h:inputSecret>
-					<h:message for="password" /><br />
+					<div>
+					<h:message for="password" />
+					</div>
 					<h:commandButton id="submit" action="#{LoginBean.login}" value="Enviar" />
 				</fieldset>
 				</h:form>
