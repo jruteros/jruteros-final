@@ -15,7 +15,7 @@
 				</h2>
 				<h:form id="formu">
 				<fieldset> 
-					<h:message for="formu" />
+					<div><h:message for="formu" /></div>
 					<h:outputLabel id="labelUsername" for="username" value="Usuario" />
 					<h:inputText id="username" value="#{LoginBean.username}" required="true" label="Usuario" >
 						<f:validateLength maximum="64" minimum="3" /> 

@@ -6,6 +6,8 @@ import interfacesDAO.UsuarioDAO;
 import interfacesServicios.IUsuarioService;
 import misClases.Usuario;
 import clasesUtiles.DAOFactory;
+import clasesUtiles.RandomString;
+import clasesUtiles.Sha256;
 
 public class UsuarioService implements IUsuarioService{
 	
@@ -53,7 +55,24 @@ public class UsuarioService implements IUsuarioService{
 		UsuarioDAO userDao = DAOFactory.getUsuarioDAO();
 		return userDao.recuperar(id);	
 	}
+	
+	public String registrar(Usuario u) throws Exception {
+		if (this.existeUsuario(u.getNombreUsuario()))
+			return null;
+		Sha256 hash = new Sha256();
+		String clave = RandomString.randomString(6);
+		u.setClave(hash.getSha256(clave));
+		if (this.alta(u)!= null){
+			return clave;
+		}else{
+			return null;
+		}
+	}
 
+	public boolean existeUsuario(String nombreUsuario) {
+		UsuarioDAO userDao = DAOFactory.getUsuarioDAO();
+		return (userDao.recuperarNombreUsuario(nombreUsuario)!=null);
+	}
 	
 
 }

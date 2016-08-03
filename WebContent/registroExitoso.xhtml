@@ -8,6 +8,17 @@
 		<ui:include src="menuPublic.xhtml" />
 	</ui:define>
 	<ui:define name="contenido">
-		#{RegistrarBean.usuario.clave}
+	<div id="content">
+		<h1>Sus credenciales de identificación:</h1>
+		<div>
+			Nombre usuario: #{RegistrarBean.usuario.nombreUsuario}
+		</div>
+		<div>
+			Contraseña: #{RegistrarBean.clave}
+		</div>
+		<div>
+			Recuerde cambiar la clave autogenerada por una propia.
+		</div>
+	</div>
 	</ui:define>
 </ui:composition>

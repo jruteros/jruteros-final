@@ -36,6 +36,7 @@ import misClases.Ruta;
 import misClases.Sexo;
 import misClases.Usuario;
 import clasesUtiles.DAOFactory;
+import clasesUtiles.Sha256;
 
 /**
  * Servlet implementation class PruebaDAOS
@@ -159,11 +160,17 @@ public class PruebaDAOS extends HttpServlet {
 		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
 		PerfilDAO perfilDAO = DAOFactory.getPerfilDAO();
 		
-		Usuario nacho = new Usuario("Ignacio", "Vacca", "ignaciovacca", "ignaciovacca@email.com", "passwordhasheaada", 36987718, "Calle 6", hombre );
-		Usuario alex = new Usuario("Alex", "Rojas", "alexrojas", "alexrojas@hotmail.com", "passwordsegura", 33333333, "25 y 60", hombre);
-		Usuario josefina = new Usuario("Josefina", "De Tal", "josefinadetal", "josefinadetal@gmail.com", "clave", 4444444, "1 y 59", mujer);
-		Administrador admin = new Administrador("Admin", "Admin", "admin", "admin@admin", "admin", 5555555, "algun lugar", hombre);
-		Administrador admin2 = new Administrador("Admin2", "Admin2", "admin2", "admin2@admin2", "admin2pass", 666666, "otro lugar", mujer);
+		Sha256 hash = new Sha256();
+		String passUser = hash.getSha256("123456");
+		String passAdmin1 = hash.getSha256("admin1");
+		String passAdmin2 = hash.getSha256("admin2");
+		
+		Usuario usuarioGen = new Usuario("Usuario", "Usuario", "usuario", "usuario@email.com", passUser, 33009900, "Calle 6", hombre );
+		Usuario nacho = new Usuario("Ignacio", "Vacca", "ignaciovacca", "ignaciovacca@email.com", passUser, 36987718, "Calle 6", hombre );
+		Usuario alex = new Usuario("Alex", "Rojas", "alexrojas", "alexrojas@hotmail.com", passUser, 33333333, "25 y 60", hombre);
+		Usuario josefina = new Usuario("Josefina", "De Tal", "josefinadetal", "josefinadetal@gmail.com", passUser, 4444444, "1 y 59", mujer);
+		Administrador admin = new Administrador("Admin", "Admin", "admin", "admin@admin", passAdmin1, 5555555, "algun lugar", hombre);
+		Administrador admin2 = new Administrador("Admin2", "Admin2", "admin2", "admin2@admin2", passAdmin2, 666666, "otro lugar", mujer);
 
 		usuarioDAO.persistir(nacho);
 		usuarioDAO.persistir(alex);
@@ -215,6 +222,7 @@ public class PruebaDAOS extends HttpServlet {
 		puntajeDAO.persistir(puntaje1);
 		puntajeDAO.persistir(puntaje2);
 		usuarioDAO.persistir(josefina);
+		usuarioDAO.persistir(usuarioGen);
 		perfilDAO.persistir(admin);
 		perfilDAO.persistir(admin2);
 

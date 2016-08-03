@@ -14,26 +14,23 @@
 			</h2>
 			<h:form id="formu">
 				<fieldset>
-					<div>
-						<h:message for="formu" />
+					<div class="error">
+						<h:message for="formu"/>
 					</div>
 					
-					<h:outputLabel id="labelNombreUsuario" for="nombreUsuario">Nombre de usuario:</h:outputLabel>
-					<h:inputText id="nombreUsuario" required="true" value="#{PerfilBean.usuario.nombreUsuario}" label="Nombre de usuario">
-						<f:validateLength maximum="64" minimum="6"/>
-					</h:inputText>
 					<div>
-						<h:message for="nombreUsuario" />
+						<h:outputLabel id="labelNombreUsuario" for="nombreUsuario">Nombre de usuario: </h:outputLabel> #{PerfilBean.usuario.nombreUsuario}
 					</div>
-					
+
 					<h:outputLabel id="labelEmail" for="email">Email:</h:outputLabel>
-					<h:inputText id="email" required="true" value="#{PerfilBean.usuario.email}" label="Email">
-						<!-- <f:validateRegex /> -->
+					<h:inputText id="email" required="true" value="#{PerfilBean.usuario.email}" label="Email" validatorMessage="No es un email válido">
+						<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
 					</h:inputText>
 					<div>
 						<h:message for="email" />
 					</div>
-
+						
+					</h:inputText>
 					<h:outputLabel id="labelNombre" for="nombre">Nombre:</h:outputLabel>
 					<h:inputText id="nombre" required="true" value="#{PerfilBean.usuario.nombre}" label="Nombre">
 						<!-- <f:validateRegex /> -->
@@ -66,21 +63,13 @@
 						<h:message for="domicilio" />
 					</div>
 					
-					<h:outputLabel id="labelOldPassword" for="oldPassword">Contraseña actual:</h:outputLabel>
-					<h:inputSecret id="oldPassword" value="#{PerfilBean.oldPassword}" label="Contraseña">
-						<!-- <f:validateRegex /> -->
-					</h:inputSecret>
 					<div>
-						<h:message for="oldPassword" />
+						<h:message for="newPassword" />
 					</div>
-					
 					<h:outputLabel id="labelNewPassword" for="newPassword">Contraseña nueva:</h:outputLabel>
 					<h:inputSecret id="newPassword" value="#{PerfilBean.newPassword}" label="Contraseña">
 						<!-- <f:validateRegex /> -->
 					</h:inputSecret>
-					<div>
-						<h:message for="newPassword" />
-					</div>
 					
 					<h:outputLabel id="labelconfirmatePassword" for="confirmatePassword">Confirmar Contraseña:</h:outputLabel>
 					<h:inputSecret id="confirmatePassword" value="#{PerfilBean.confirmatePassword}" label="Contraseña">

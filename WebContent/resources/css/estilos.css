@@ -17,6 +17,10 @@ html, body {
 	position: relative;
 }
 
+.error{
+	color:red;	
+}
+
 footer {
 	height: 20px;
 	position: relative;
