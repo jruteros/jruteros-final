@@ -10,7 +10,10 @@
 		<class>misClases.Usuario</class>
 		<properties>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.password" value="root" />
+			<!-- <property name="hibernate.connection.password" value="jyaa_sala_pwd20" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://mysql.java.linti.unlp.edu.ar/jyaa_sala_bd20" />
+			<property name="hibernate.connection.username" value="jyaa_sala_usr20" /> -->
+			<property name="hibernate.connection.password" value="" />
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/bdJRuteros" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
