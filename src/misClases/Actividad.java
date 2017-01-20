@@ -11,6 +11,7 @@ public class Actividad {
 	private Long id_actividad;
 	
 	private String nombre;
+	private boolean habilitada;
 	
 	public Actividad() {}
 	
@@ -32,5 +33,13 @@ public class Actividad {
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public boolean isHabilitada() {
+		return habilitada;
+	}
+
+	public void setHabilitada(boolean habilitada) {
+		this.habilitada = habilitada;
 	}
 }

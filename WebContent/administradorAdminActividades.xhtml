@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	template="/WEB-INF/facelets/templates/defaultVista.xhtml">
+	
+	<ui:define name="menu">
+		<!-- <ui:include src="menuUsuario.xhtml" /> -->
+		<ui:include src="#{menu}" />
+	</ui:define>
+	<ui:define name="contenido">
+	<div class="container">
+		<table id="grid-data-api" class="table table-striped" data-toggle="bootgrid">
+			<thead>
+				<tr>
+					<th data-column-id="nombreActividad" data-order="asc">Nombre de Actividad</th>
+					<th data-column-id="verRutas" data-formatter="ver+">Ver Rutas Asociadas</th>
+					<th data-column-id="deshabilitar">Deshabilitado</th>
+					<th data-column-id="habilitar">Habilitado</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="#{ActividadBean.listaActividades}" var="a">
+					<tr>
+						<td><h:outputText value="#{a.nombre}"/></td>
+						<td>
+						<h:form>
+							<h:commandLink id="submit" action="#{ActividadBean.verRutasAsociadas(a)}" value="Ver Rutas Asociadas" />
+						</h:form>
+						</td>
+						<c:if test="${a.habilitada eq 'true'}">
+							<td><h:outputText value="-"/></td>
+						</c:if>
+						<c:if test="${a.habilitada eq 'false'}">
+							<td>
+							<h:form>
+							<h:commandLink id="submit" action="#{ActividadBean.habilitar(a)}" value="Habilitar" />
+							</h:form>
+							</td>
+						</c:if>
+						<c:if test="${a.habilitada eq 'true'}">
+							<td>
+							<h:form>
+							<h:commandLink id="submit" action="#{ActividadBean.deshabilitar(a)}" value="Deshabilitar" />
+							</h:form>
+							</td>
+						</c:if>
+						<c:if test="${a.habilitada eq 'false'}">
+							<td><h:outputText value="-"/></td>
+						</c:if>
+					</tr>
+				</c:forEach>
+			</tbody>
+	   	</table>
+		<h:outputScript name="jqueryBootgrid/jquery.bootgrid.js" />
+	</div>
+	</ui:define>
+</ui:composition>

@@ -54,6 +54,12 @@
 		<managed-bean-scope>request</managed-bean-scope> 
 	</managed-bean>
 	<managed-bean> 
+		<description>Actividad Bean</description> 
+		<managed-bean-name>ActividadBean</managed-bean-name> 
+		<managed-bean-class>beans.ActividadBean</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope> 
+	</managed-bean>
+	<managed-bean> 
 		<description>Perfil Bean</description> 
 		<managed-bean-name>PerfilBean</managed-bean-name> 
 		<managed-bean-class>beans.PerfilBean</managed-bean-class> 
