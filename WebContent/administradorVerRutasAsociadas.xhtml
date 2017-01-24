@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	template="/WEB-INF/facelets/templates/defaultVista.xhtml">
+	
+	<ui:define name="menu">
+		<ui:include src="#{menu}" />
+	</ui:define>
+	<ui:define name="contenido">
+		
+		<c:if test="${empty ActividadBean.rutasAsociadas}">
+			<p> No hay Rutas Asociadas</p>
+		</c:if>
+		
+		<c:if test="${not empty ActividadBean.rutasAsociadas}">
+			<c:forEach items="#{ActividadBean.rutasAsociadas}" var="r" varStatus="loop">
+				<div id="login">
+					<h2> Ruta Numero: ${loop.index +1} </h2> 
+					<h:form class="formu">
+					<fieldset> 
+						<h:outputLabel class="labelRutadNombre" for="rutaNombre" value="Nombre de la Ruta:" /> 
+						<h:inputText class="name" value="#{r.nombre}" disabled="true"> </h:inputText> 
+						<h:outputLabel class="labelRutaDescripcion" for="rutaDescripcion" value="Descripcion:" /> 
+						<h:inputText class="description" value="#{r.descripcion}" disabled="true"> </h:inputText>
+						
+					</fieldset>
+					</h:form>
+				</div>
+				
+			</c:forEach>
+		</c:if>
+		
+		<a href="administradorAdminActividades.xhtml" class="btn btn-default" >Volver</a>
+	</ui:define>
+</ui:composition>

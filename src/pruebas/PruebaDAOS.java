@@ -206,9 +206,41 @@ public class PruebaDAOS extends HttpServlet {
 		ruta2.agregarCoordenada((float) -34.11, (float) 33.01);
 		ruta2.agregarCoordenada((float) -34.01, (float) 33.00);
 		
+		Ruta ruta3 = new Ruta("Ruta 66", "Linda Ruta", (float) 34.08, 
+				timeruta2, dateruta2, nacho, circular, carreraMontaña, facil, publica);
+		ruta3.agregarCoordenada((float) -34.01, (float) 33.00);
+		ruta3.agregarCoordenada((float) -34.11, (float) 33.01);
+		ruta3.agregarCoordenada((float) -34.21, (float) 33.02);
+		ruta3.agregarCoordenada((float) -34.31, (float) 33.03);
+		ruta3.agregarCoordenada((float) -34.41, (float) 33.04);
+		ruta3.agregarCoordenada((float) -34.51, (float) 33.05);
+		ruta3.agregarCoordenada((float) -34.41, (float) 33.04);
+		ruta3.agregarCoordenada((float) -34.31, (float) 33.03);
+		ruta3.agregarCoordenada((float) -34.21, (float) 33.02);
+		ruta3.agregarCoordenada((float) -34.11, (float) 33.01);
+		ruta3.agregarCoordenada((float) -34.01, (float) 33.00);
+		
+		Ruta ruta4 = new Ruta("Ruta 44", "Preciosa Ruta", (float) 34.08, 
+				timeruta2, dateruta2, nacho, soloIda, carreraMontaña, dificil, publica);
+		ruta4.agregarCoordenada((float) -34.01, (float) 33.00);
+		ruta4.agregarCoordenada((float) -34.11, (float) 33.01);
+		ruta4.agregarCoordenada((float) -34.21, (float) 33.02);
+		ruta4.agregarCoordenada((float) -34.31, (float) 33.03);
+		ruta4.agregarCoordenada((float) -34.41, (float) 33.04);
+		ruta4.agregarCoordenada((float) -34.51, (float) 33.05);
+		ruta4.agregarCoordenada((float) -34.41, (float) 33.04);
+		ruta4.agregarCoordenada((float) -34.31, (float) 33.03);
+		ruta4.agregarCoordenada((float) -34.21, (float) 33.02);
+		ruta4.agregarCoordenada((float) -34.11, (float) 33.01);
+		ruta4.agregarCoordenada((float) -34.01, (float) 33.00);
+		
+		
+		
 		RutaDAO rutaDAO = DAOFactory.getRutaDAO();
 		rutaDAO.persistir(ruta1);
 		rutaDAO.persistir(ruta2);
+		rutaDAO.persistir(ruta3);
+		rutaDAO.persistir(ruta4);
 
 		Imagen imagen = new Imagen("montaña", "Montaña linda", (float) 800, (float) 600, "/rut/aaaa");
 		imagen.setRuta(ruta1);
