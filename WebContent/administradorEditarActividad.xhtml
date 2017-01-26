@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	template="/WEB-INF/facelets/templates/defaultVista.xhtml">
+	
+	<ui:define name="menu">
+		<ui:include src="#{menu}" />
+	</ui:define>
+	
+	<ui:define name="contenido">
+		<div id="login">
+			<h2>Nueva Actividad</h2>
+			<h:form id="formu">
+				<fieldset>
+					<div>
+						<h:message for="formu" />
+					</div>
+					
+					<h:inputHidden id="idActividadActual"  hidden="true" value="#{ActividadBean.actividad.id_actividad}" label="Id de actividad Actual">
+					</h:inputHidden> 
+					
+					<h:outputLabel id="labelNombreActividadActual" for="nombreActividadActual">Nombre de Actividad Actual:</h:outputLabel>
+					<h:inputText id="nombreActividadActual" disabled="true" value="#{ActividadBean.actividad.nombre}" label="Nombre de actividad Actual">
+					</h:inputText> 
+					
+					<h:outputLabel id="labelNombreActividadNueva" for="nombreActividadNueva">Nombre de Actividad Nueva:</h:outputLabel>
+					<h:inputText id="nombreActividadNueva" required="true" value="#{ActividadBean.nombreActividadNueva}" label="Nombre de actividad Nueva">
+					</h:inputText>
+					
+					
+					<h:commandButton action="#{ActividadBean.guardarActividadEditada()}" value="Guardar" />
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

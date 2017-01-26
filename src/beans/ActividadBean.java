@@ -15,14 +15,32 @@ public class ActividadBean {
 	private List<Actividad> listaActividades;
 	private Actividad actividad;
 	private List<Ruta> rutasAsociadas;
+	private String nombreActividadNueva;
 	
 	public ActividadBean (){
 		setListaActividades(actividadService.recuperarTodos());
+		actividad = new Actividad();
 	}
 	
 	public String verRutasAsociadas(Actividad actividad){
 		setRutasAsociadas(rutaService.getRutasAsociadas(actividad.getId_actividad()));
      	return "administradorVerRutasAsociadas.xhtml";
+	}
+	
+	public String editarNombreActividad(Actividad actividad){
+		this.actividad = actividadService.recuperar(actividad.getId_actividad());
+     	return "administradorEditarActividad.xhtml";
+	}
+	
+	public String guardarActividadEditada(){
+		actividad.setNombre(this.nombreActividadNueva);
+		actividadService.guardarActividadEditada(actividad);
+		return "listadoActividades";
+	}
+	
+	public String guardarActividad(){
+		actividadService.guardarActividad(actividad);
+		return "listadoActividades";
 	}
 	
 	public void habilitar (Actividad actividad){
@@ -55,6 +73,14 @@ public class ActividadBean {
 
 	public void setRutasAsociadas(List<Ruta> rutasAsociadas) {
 		this.rutasAsociadas = rutasAsociadas;
+	}
+
+	public String getNombreActividadNueva() {
+		return nombreActividadNueva;
+	}
+
+	public void setNombreActividadNueva(String nombreActividadNueva) {
+		this.nombreActividadNueva = nombreActividadNueva;
 	}
 	
 }

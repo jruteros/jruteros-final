@@ -29,4 +29,18 @@ public class ActividadService {
 		actividadDAO.actualizar(actividad);
 	}
 
+	public void guardarActividad(Actividad actividad) {
+		actividadDAO.persistir(actividad);
+		
+	}
+
+	public Actividad recuperar(Long id_actividad) {
+		return actividadDAO.recuperar(id_actividad);
+	}
+
+	public void guardarActividadEditada(Actividad actividad) {
+	    actividadDAO.actualizar(actividad);
+		
+	}
+
 }

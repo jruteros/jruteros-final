@@ -16,6 +16,7 @@
 			<thead>
 				<tr>
 					<th data-column-id="nombreActividad" data-order="asc">Nombre de Actividad</th>
+					<th data-column-id="editarActividad" data-order="asc">Editar Nombre</th>
 					<th data-column-id="verRutas" data-formatter="ver+">Ver Rutas Asociadas</th>
 					<th data-column-id="deshabilitar">Deshabilitado</th>
 					<th data-column-id="habilitar">Habilitado</th>
@@ -26,6 +27,11 @@
 				<c:forEach items="#{ActividadBean.listaActividades}" var="a">
 					<tr>
 						<td><h:outputText value="#{a.nombre}"/></td>
+						<td>
+						<h:form>
+							<h:commandLink id="submit" action="#{ActividadBean.editarNombreActividad(a)}" value="Editar Nombre" />
+						</h:form>
+						</td>
 						<td>
 						<h:form>
 							<h:commandLink id="submit" action="#{ActividadBean.verRutasAsociadas(a)}" value="Ver Rutas Asociadas" />
@@ -55,6 +61,7 @@
 				</c:forEach>
 			</tbody>
 	   	</table>
+	   	<a href="administradorNuevaActividad.xhtml" class="btn btn-default">Crear nueva actividad</a>
 		<h:outputScript name="jqueryBootgrid/jquery.bootgrid.js" />
 	</div>
 	</ui:define>
