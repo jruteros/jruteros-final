@@ -30,6 +30,7 @@
     <servlet-name>PruebaDAOS</servlet-name>
     <url-pattern>/PruebaDAOS</url-pattern>
   </servlet-mapping>
+   
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -51,4 +52,24 @@
   <listener>
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
   </listener>
+   <!-- FILTROS -->
+  <filter>
+      <filter-name>ValidatePermissonsAdmin</filter-name>
+      <filter-class>filter.ValidatePermissonsAdmin</filter-class>
+  </filter>
+  <filter>
+      <filter-name>ValidatePermissonsUsuario</filter-name>
+      <filter-class>filter.ValidatePermissonsUsuario</filter-class>
+  </filter>
+  
+  <!-- FILTER RULES -->
+  <filter-mapping>
+       <filter-name>ValidatePermissonsAdmin</filter-name>
+       <url-pattern>/views/admin/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+       <filter-name>ValidatePermissonsUsuario</filter-name>
+       <url-pattern>/views/usuario/*</url-pattern>
+  </filter-mapping>
+ 
 </web-app>

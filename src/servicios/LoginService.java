@@ -35,7 +35,7 @@ public class LoginService implements ILoginService{
 			}else{
 				Map<String,Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 				session.put("perfil", p);
-				session.put("menu", "menu"+p.getClass().getSimpleName()+".xhtml");
+				session.put("menu", "/views/menu"+p.getClass().getSimpleName()+".xhtml");
 				return "Login"+p.getClass().getSimpleName();
 			}
 		}else {

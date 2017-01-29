@@ -6,55 +6,52 @@
     version="2.2">
 
 	<navigation-rule> 
-		<from-view-id>/login.xhtml</from-view-id> 
+		<from-view-id>login.xhtml</from-view-id> 
 		<navigation-case> 
 			<from-outcome>LoginUsuario</from-outcome> 
-			<to-view-id>/usuarioAdministrarRutas.xhtml</to-view-id> 
+			<to-view-id>views/usuario/usuarioAdministrarRutas.xhtml</to-view-id> 
 			<redirect></redirect>
 		</navigation-case> 
 		<navigation-case> 
 			<from-outcome>LoginAdministrador</from-outcome> 
-			<to-view-id>/administradorAdminUsuarios.xhtml</to-view-id>
+			<to-view-id>views/admin/administradorAdminUsuarios.xhtml</to-view-id>
 			<redirect></redirect> 
 		</navigation-case>
-		<navigation-case> 
-			<from-outcome></from-outcome> 
-			<to-view-id>/login.xhtml</to-view-id> 
-		</navigation-case>  
 	</navigation-rule>
 
-	<navigation-rule> 
+	 <navigation-rule> 
 		<from-view-id>*</from-view-id> 
 		<navigation-case> 
 			<from-outcome>Logout</from-outcome> 
-			<to-view-id>/index.xhtml</to-view-id> 
+			<to-view-id>index.xhtml</to-view-id> 
 			<redirect></redirect>
 		</navigation-case>
-	</navigation-rule>
+	</navigation-rule> 
+	
 	
 	<navigation-rule> 
-		<from-view-id>/administradorAdminUsuarios.xhtml</from-view-id> 
+		<from-view-id>views/admin/administradorAdminUsuarios.xhtml</from-view-id> 
 		<navigation-case> 
 			<from-outcome>verMas</from-outcome> 
-			<to-view-id>/administradorVerMas.xhtml</to-view-id> 
+			<to-view-id>views/admin/administradorVerMas.xhtml</to-view-id> 
 			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule> 
-		<from-view-id>/administradorNuevaActividad.xhtml</from-view-id> 
+		<from-view-id>views/admin/administradorNuevaActividad.xhtml</from-view-id> 
 		<navigation-case> 
 			<from-outcome>listadoActividades</from-outcome> 
-			<to-view-id>/administradorAdminActividades.xhtml</to-view-id> 
+			<to-view-id>views/admin/administradorAdminActividades.xhtml</to-view-id> 
 			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule> 
-		<from-view-id>/administradorEditarActividad.xhtml</from-view-id> 
+		<from-view-id>views/admin/administradorEditarActividad.xhtml</from-view-id> 
 		<navigation-case> 
 			<from-outcome>listadoActividades</from-outcome> 
-			<to-view-id>/administradorAdminActividades.xhtml</to-view-id> 
+			<to-view-id>views/admin/administradorAdminActividades.xhtml</to-view-id> 
 			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
