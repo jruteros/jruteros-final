@@ -13,7 +13,7 @@ html, body {
 }
 
 #content {
-	padding: 25px;
+	padding: 0px 25px 25px 25px;
 	position: relative;
 }
 
@@ -53,7 +53,7 @@ input[type="radio"], input[type="checkbox"] {
 
 #login {
 	margin: 10px auto;
-	width: 400px;
+	width: 40%;
 }
 
 #login h2 {
@@ -75,7 +75,7 @@ input[type="radio"], input[type="checkbox"] {
 	-webkit-border-radius: 0 0 20px 20px;
 	-moz-border-radius: 0 0 20px 20px;
 	border-radius: 0 0 20px 20px;
-	padding: 20px 26px;
+	padding: 20px 95px;
 }
 
 #login fieldset p {
@@ -84,6 +84,15 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 #login fieldset p:last-child {
+	margin-bottom: 0;
+}
+
+#login fieldset div {
+	color: #777;
+	margin-bottom: 14px;
+}
+
+#login fieldset div:last-child {
 	margin-bottom: 0;
 }
 
@@ -98,6 +107,7 @@ input[type="radio"], input[type="checkbox"] {
 	background-color: #eee;
 	color: #777;
 	padding: 4px 10px;
+	margin: auto;
 	width: 328px;
 	border: 1px solid;
 }
@@ -108,11 +118,96 @@ input[type="radio"], input[type="checkbox"] {
 	display: block;
 	margin: 0 auto;
 	padding: 4px 0;
-	width: 100px;
+	width: 30%;
 }
 
 #login fieldset input[type="submit"]:hover {
 	background-color: #28ad63;
+}
+
+#login fieldset label {
+	width: 35%;
+	display:block;
+}
+
+
+#formu {
+	margin: auto;
+	width: 70%;
+}
+
+#formu h2 {
+	background-color: #006400;
+	-webkit-border-radius: 20px 20px 0 0;
+	-moz-border-radius: 20px 20px 0 0;
+	border-radius: 20px 20px 0 0;
+	color: #fff;
+	font-size: 28px;
+	padding: 20px 26px;
+}
+
+#formu h2 span[class*="fontawesome-"] {
+	margin-right: 14px;
+}
+
+#formu fieldset {
+	background-color: #fff;
+	-webkit-border-radius: 0 0 20px 20px;
+	-moz-border-radius: 0 0 20px 20px;
+	border-radius: 0 0 20px 20px;
+	padding: 0px 26px;
+}
+
+#formu fieldset p {
+	color: #777;
+	margin-bottom: 14px;
+}
+
+#formu fieldset p:last-child {
+	margin-bottom: 0;
+}
+
+#formu fieldset div {
+	color: #777;
+	margin-bottom: 14px;
+	margin-top:10px;
+}
+
+#formu fieldset div:last-child {
+	margin-bottom: 0;
+}
+
+#formu fieldset input {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#formu fieldset input[type="text"], #login fieldset input[type="password"]
+	{
+	background-color: #eee;
+	color: #777;
+	padding: 4px 10px;
+	width: 328px;
+	border: 1px solid;
+}
+
+#formu fieldset input[type="submit"] {
+	background-color: black;
+	color: #fff;
+	display: block;
+	margin: 0 auto;
+	padding: 4px 0;
+	width: 100%;
+}
+
+#formu fieldset input[type="submit"]:hover {
+	background-color: #28ad63;
+}
+
+#formu fieldset label {
+	width: 35%;
+	text-align: right;
 }
 
 #crearNueva {

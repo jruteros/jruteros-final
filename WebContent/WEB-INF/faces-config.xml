@@ -56,6 +56,15 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule> 
+		<from-view-id>/usuarioAdministrarRutas.xhtml</from-view-id> 
+		<navigation-case> 
+			<from-outcome>altaRuta</from-outcome> 
+			<to-view-id>/usuarioAltaRuta.xhtml</to-view-id> 
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+	
 	<managed-bean> 
 		<description>Login Bean</description> 
 		<managed-bean-name>LoginBean</managed-bean-name> 
@@ -84,6 +93,12 @@
 		<description>Registrar Bean</description> 
 		<managed-bean-name>RegistrarBean</managed-bean-name> 
 		<managed-bean-class>beans.RegistrarBean</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope> 
+	</managed-bean>
+	<managed-bean> 
+		<description>Ruta Bean</description> 
+		<managed-bean-name>RutaBean</managed-bean-name> 
+		<managed-bean-class>beans.RutaBean</managed-bean-class> 
 		<managed-bean-scope>request</managed-bean-scope> 
 	</managed-bean>
 </faces-config>

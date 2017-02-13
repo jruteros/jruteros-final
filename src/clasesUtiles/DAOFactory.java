@@ -76,8 +76,5 @@ public class DAOFactory {
 	public static SexoDAO getSexoDAO(){
 		return new SexoDAOHibernateJPA();
 	}
-	
-	
-	
 }
 

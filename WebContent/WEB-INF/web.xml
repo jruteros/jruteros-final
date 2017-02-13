@@ -40,6 +40,19 @@
     <servlet-name>Faces Servlet</servlet-name>
  	<url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>RESTful Jersey</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>rest.jersey</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RESTful Jersey</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
   <context-param>
     <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
     <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
@@ -70,6 +83,5 @@
   <filter-mapping>
        <filter-name>ValidatePermissonsUsuario</filter-name>
        <url-pattern>/views/usuario/*</url-pattern>
-  </filter-mapping>
- 
+  </filter-mapping> 
 </web-app>
