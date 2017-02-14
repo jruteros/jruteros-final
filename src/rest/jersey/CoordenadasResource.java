@@ -2,7 +2,10 @@ package rest.jersey;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -26,6 +29,11 @@ public class CoordenadasResource {
 	
 	@Context
 	Request request;
+	
+	@Inject 
+    HttpServletRequest httpRequest;
+	
+	HttpSession session;
 	
 	CoordenadaService coordenadaService;
 	
@@ -59,6 +67,7 @@ public class CoordenadasResource {
             @QueryParam("lon") Double lon ){
 		Coordenada coordenada = new Coordenada(lat,lon);
 		coordenadaService.crearCoordenada(coordenada);
+		httpRequest.getSession().setAttribute("coordenadas", coordenadaService.getCoordenadasList());
 	}
 	
 	@DELETE

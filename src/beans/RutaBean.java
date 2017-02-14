@@ -3,6 +3,9 @@ package beans;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import clasesUtiles.DAOFactory;
 import misClases.Actividad;
@@ -10,6 +13,7 @@ import misClases.Dificultad;
 import misClases.Formato;
 import misClases.Privacidad;
 import misClases.Ruta;
+import rest.jersey.Coordenada;
 import servicios.ActividadService;
 
 public class RutaBean {
@@ -26,6 +30,13 @@ public class RutaBean {
 		this.dificultades = DAOFactory.getDificultadDAO().recuperarTodos();
 		this.formatos = DAOFactory.getFormatoDAO().recuperarTodos();
 		this.privacidades = DAOFactory.getPrivacidadDAO().recuperarTodos();
+		this.ruta = new Ruta();
+		ruta.setPrivacidad(new Privacidad());
+		ruta.setDificultad(new Dificultad());
+		ruta.setFormato(new Formato());
+		ruta.setActividad(new Actividad());
+		
+		
 	}
 
 	public Ruta getRuta() {
@@ -57,6 +68,13 @@ public class RutaBean {
 	}
 	public void setPrivacidades(List<Privacidad> privacidades) {
 		this.privacidades = privacidades;
+	}
+	
+	public void alta (){
+		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpSession session = request.getSession();
+		List<Coordenada> coordenadas = (List<Coordenada>) session.getAttribute("coordenadas");
+		System.out.println("prueba");
 	}
 	
 }
