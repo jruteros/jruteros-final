@@ -1,5 +1,7 @@
 package hibernateJPA;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -10,6 +12,7 @@ import interfacesDAO.ActividadDAO;
 
 import misClases.Actividad;
 import misClases.Administrador;
+import misClases.Ruta;
 
 
 
@@ -38,6 +41,12 @@ public class ActividadDAOHibernateJPA extends GenericDAOHibernateJPA<Actividad> 
 		else return false;
 	}
 
+	@Override
+	public List<Actividad> recuperarHabilitadas() {
+		Query consulta = EMF.getEMF().createEntityManager().createQuery("select a from Actividad a where a.habilitada = true");
+		List<Actividad> resultado = (List<Actividad>) consulta.getResultList();
+		return resultado;
+	}
 	
 
 

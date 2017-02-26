@@ -15,6 +15,10 @@ public class ActividadService {
 		this.actividadDAO = DAOFactory.getActividadDAO();
 	}
 	
+	public List<Actividad> recuperarHabilitadas(){
+		return actividadDAO.recuperarHabilitadas();
+	}
+	
 	public List<Actividad> recuperarTodos() {
 		return actividadDAO.recuperarTodos();
 	}

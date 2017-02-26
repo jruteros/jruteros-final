@@ -1,6 +1,8 @@
 package beans;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -9,12 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import clasesUtiles.DAOFactory;
 import misClases.Actividad;
+import misClases.Coordenada;
 import misClases.Dificultad;
 import misClases.Formato;
 import misClases.Privacidad;
 import misClases.Ruta;
-import rest.jersey.Coordenada;
 import servicios.ActividadService;
+import servicios.RutaService;
 
 public class RutaBean {
 
@@ -24,9 +27,11 @@ public class RutaBean {
 	private List<Formato> formatos;
 	private List<Privacidad> privacidades;
 	
-	@PostConstruct
-	public void init() {
-		this.actividades = new ActividadService().recuperarTodos();
+	List<Ruta> listaRutas;
+	RutaService rutaService = new RutaService();	
+	
+	public RutaBean (){
+		this.actividades = new ActividadService().recuperarHabilitadas();
 		this.dificultades = DAOFactory.getDificultadDAO().recuperarTodos();
 		this.formatos = DAOFactory.getFormatoDAO().recuperarTodos();
 		this.privacidades = DAOFactory.getPrivacidadDAO().recuperarTodos();
@@ -35,8 +40,19 @@ public class RutaBean {
 		ruta.setDificultad(new Dificultad());
 		ruta.setFormato(new Formato());
 		ruta.setActividad(new Actividad());
+		listaRutas = rutaService.recuperarTodas();
+	}
+	
+	@PostConstruct
+	public void init() {
 		
 		
+	}
+	
+	public boolean esRutaPropia(Ruta ruta){
+		Map<String,Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		Long idUsuario = (Long )session.get("perfil");
+		return rutaService.esRutaDeEsteUsuario(ruta.getId_ruta(),idUsuario);
 	}
 
 	public Ruta getRuta() {
@@ -70,11 +86,21 @@ public class RutaBean {
 		this.privacidades = privacidades;
 	}
 	
+	
+	public List<Ruta> getListaRutas() {
+		return listaRutas;
+	}
+
+	public void setListaRutas(List<Ruta> listaRutas) {
+		this.listaRutas = listaRutas;
+	}
+
 	public void alta (){
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		HttpSession session = request.getSession();
-		List<Coordenada> coordenadas = (List<Coordenada>) session.getAttribute("coordenadas");
-		System.out.println("prueba");
+		Collection<Coordenada> coordenadas = (List<Coordenada>) session.getAttribute("coordenadas");
+		ruta.setCoordenadas(coordenadas);
+		rutaService.guardarRuta(ruta);
 	}
 	
 }

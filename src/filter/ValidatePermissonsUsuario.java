@@ -41,10 +41,8 @@ public class ValidatePermissonsUsuario implements Filter {
 	    	Perfil perfil = (Perfil) httpReq.getSession().getAttribute("perfil");
 	    	if (perfil.getClass().getSimpleName().equals("Usuario")){
 	    		return true;
-	    	}else
-	    		return false;
-	    }else 
-	    	return false;
+	    	}
+		}return false;
 	}
 
 	@Override

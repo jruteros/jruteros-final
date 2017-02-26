@@ -14,11 +14,6 @@ public class UsuarioBean {
 	public UsuarioBean() {
 		listaUsuarios = usuarioService.recuperarTodos();
 	}
-
-	/*public String listarUsuarios() {
-		listaUsuarios = usuarioService.recuperarTodos();
-		return "administradorAdminUsuarios.xhtml?faces-redirect=true";
-	}*/
 	
 	public String verMas(Usuario usuario){
 		this.usuario = usuario;

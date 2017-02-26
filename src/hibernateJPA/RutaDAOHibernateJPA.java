@@ -25,16 +25,14 @@ public class RutaDAOHibernateJPA extends GenericDAOHibernateJPA<Ruta> implements
 		return resultado;
 		
 	}
-	
-	/*
-	 @Override
-	public List<Perfil> recuperarNombre(String nombre ) {
-		Query consulta = EMF.getEMF().createEntityManager().createQuery("select p from " + getPersistentClass().getSimpleName()+" p where p.nombre=?1");
-		consulta.setParameter(1, nombre);
-		List<Perfil> resultado = (List<Perfil>)consulta.getResultList();
-		if (resultado!=null)
-		  return resultado;
-		else return null;
+
+	@Override
+	public boolean esRutaDeEsteUsuario(Long idRuta, Long idUsuario) {
+		Query consulta = EMF.getEMF().createEntityManager().createQuery("select r from Ruta r where r.id_ruta = ?1 AND r.usuario.id_perfil = ?2");
+		consulta.setParameter(1, idRuta);
+		consulta.setParameter(2, idUsuario);
+		List<Ruta> resultado = (List<Ruta>) consulta.getResultList();
+		return !resultado.isEmpty();
 	}
-	 */
+	
 }

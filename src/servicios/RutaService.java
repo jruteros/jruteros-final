@@ -16,4 +16,16 @@ public class RutaService {
 	public List<Ruta >getRutasAsociadas (Long idActividad){
 		return rutadDAO.getRutasAsociadas(idActividad);
 	}
+	
+	public List<Ruta> recuperarTodas(){
+		return rutadDAO.recuperarTodos();
+	}
+	
+	public boolean esRutaDeEsteUsuario(Long idRuta,Long idUsuario){
+		return rutadDAO.esRutaDeEsteUsuario(idRuta, idUsuario);
+	}
+	
+	public void guardarRuta(Ruta ruta){
+		this.rutadDAO.persistir(ruta);
+	}
 }
