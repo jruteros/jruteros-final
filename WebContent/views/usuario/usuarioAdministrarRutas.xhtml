@@ -39,7 +39,7 @@
 						<c:if test="${RutaBean.esRutaPropia(r) eq 'true'}">
 							<td>
 							<h:form>
-								<h:commandLink id="submit" action="#{RutaBean.editarRuta(r)}" value="Editar Ruta" />
+								<h:commandLink id="submit" action="#{RutaBean.editarRuta(r)}" value="Solo Ruta Propia" />
 							</h:form>
 							</td>
 						</c:if>
@@ -49,7 +49,7 @@
 						<c:if test="${RutaBean.esRutaPropia(r) eq 'true'}">
 							<td>
 							<h:form>
-								<h:commandLink id="submit" action="#{RutaBean.eliminarRuta(r)}" value="Editar Ruta" />
+								<h:commandLink id="submit" action="#{RutaBean.eliminarRuta(r)}" value="Solo Ruta Propia" />
 							</h:form>
 							</td>
 						</c:if>

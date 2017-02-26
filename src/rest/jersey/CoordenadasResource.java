@@ -32,9 +32,6 @@ public class CoordenadasResource {
 	
 	@Inject 
     HttpServletRequest httpRequest;
-	
-	HttpSession session;
-	
 	CoordenadaService coordenadaService;
 	
 	public CoordenadasResource(){

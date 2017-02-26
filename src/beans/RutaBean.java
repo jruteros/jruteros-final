@@ -16,6 +16,7 @@ import misClases.Dificultad;
 import misClases.Formato;
 import misClases.Privacidad;
 import misClases.Ruta;
+import misClases.Usuario;
 import servicios.ActividadService;
 import servicios.RutaService;
 
@@ -51,8 +52,8 @@ public class RutaBean {
 	
 	public boolean esRutaPropia(Ruta ruta){
 		Map<String,Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-		Long idUsuario = (Long )session.get("perfil");
-		return rutaService.esRutaDeEsteUsuario(ruta.getId_ruta(),idUsuario);
+		Usuario usuario = (Usuario)session.get("perfil");
+		return rutaService.esRutaDeEsteUsuario(ruta.getId_ruta(),usuario.getId_perfil());
 	}
 
 	public Ruta getRuta() {
@@ -96,9 +97,8 @@ public class RutaBean {
 	}
 
 	public void alta (){
-		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		HttpSession session = request.getSession();
-		Collection<Coordenada> coordenadas = (List<Coordenada>) session.getAttribute("coordenadas");
+		Map<String,Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		Collection<Coordenada> coordenadas = (List<Coordenada>) session.get("coordenadas");
 		ruta.setCoordenadas(coordenadas);
 		rutaService.guardarRuta(ruta);
 	}
