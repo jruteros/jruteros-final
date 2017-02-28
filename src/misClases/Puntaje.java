@@ -11,8 +11,7 @@ public class Puntaje {
 	
 	@Id @GeneratedValue
 	private Long id_puntaje;
-	
-	private int puntuacion;
+	private Integer puntuacion;
 	
 	@ManyToOne(optional = true)
 	@JoinColumn(name="id_usuario")
@@ -38,11 +37,11 @@ public class Puntaje {
 		this.id_puntaje = id_puntaje;
 	}
 	
-	public int getPuntuacion() {
+	public Integer getPuntuacion() {
 		return puntuacion;
 	}
 	
-	public void setPuntuacion(int puntuacion) {
+	public void setPuntuacion(Integer puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 	

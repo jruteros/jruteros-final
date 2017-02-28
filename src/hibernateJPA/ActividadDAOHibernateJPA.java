@@ -14,12 +14,6 @@ import misClases.Actividad;
 import misClases.Administrador;
 import misClases.Ruta;
 
-
-
-
-
-
-
 public class ActividadDAOHibernateJPA extends GenericDAOHibernateJPA<Actividad> implements ActividadDAO {
 
 

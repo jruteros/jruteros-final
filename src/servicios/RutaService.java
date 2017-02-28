@@ -2,30 +2,41 @@ package servicios;
 
 import java.util.List;
 
+import javax.annotation.ManagedBean;
+
 import clasesUtiles.DAOFactory;
 import interfacesDAO.RutaDAO;
 import misClases.Ruta;
 
+@ManagedBean
 public class RutaService {
-	private RutaDAO rutadDAO;
+	private RutaDAO rutaDAO;
 	
 	public RutaService(){
-		this.rutadDAO = DAOFactory.getRutaDAO();
+		this.rutaDAO = DAOFactory.getRutaDAO();
 	}
 	
 	public List<Ruta >getRutasAsociadas (Long idActividad){
-		return rutadDAO.getRutasAsociadas(idActividad);
+		return rutaDAO.getRutasAsociadas(idActividad);
 	}
 	
 	public List<Ruta> recuperarTodas(){
-		return rutadDAO.recuperarTodos();
+		return rutaDAO.recuperarTodos();
 	}
 	
 	public boolean esRutaDeEsteUsuario(Long idRuta,Long idUsuario){
-		return rutadDAO.esRutaDeEsteUsuario(idRuta, idUsuario);
+		return rutaDAO.esRutaDeEsteUsuario(idRuta, idUsuario);
 	}
 	
 	public void guardarRuta(Ruta ruta){
-		this.rutadDAO.persistir(ruta);
+		this.rutaDAO.persistir(ruta);
+	}
+	
+	public Ruta recuperar (Long idRuta){
+		return rutaDAO.recuperar(idRuta);
+	}
+	
+	public void actualizar (Ruta ruta){
+		this.rutaDAO.actualizar(ruta);
 	}
 }

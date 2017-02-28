@@ -28,21 +28,25 @@ public class ValidatePermissonsUsuario implements Filter {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 	    HttpServletResponse httpResp = (HttpServletResponse) response;
 	    //System.out.println("intercepto usuario");
-	    if (validateUsuario(httpReq)){
-	    	chain.doFilter(request, response);
-	    }
-	    else 
-	    	httpResp.sendRedirect(httpReq.getContextPath()+"/views/errorPermiso.xhtml");
-		
+	    if (isAuthenticatedUser(httpReq)){
+		    if (isUsuario(httpReq)){
+		    	chain.doFilter(request, response);
+		    }else 
+		    	httpResp.sendRedirect(httpReq.getContextPath()+"/views/errorPermiso.xhtml");
+	    }else 
+	    	httpResp.sendRedirect(httpReq.getContextPath()+"/errorAutenticacion.xhtml");
 	}
 
-	private boolean validateUsuario(HttpServletRequest httpReq) {
-		if (httpReq.getSession().getAttribute("perfil") != null){
-	    	Perfil perfil = (Perfil) httpReq.getSession().getAttribute("perfil");
-	    	if (perfil.getClass().getSimpleName().equals("Usuario")){
-	    		return true;
-	    	}
-		}return false;
+	private boolean isUsuario(HttpServletRequest httpReq) {
+    	Perfil perfil = (Perfil) httpReq.getSession().getAttribute("perfil");
+    	if (perfil.getClass().getSimpleName().equals("Usuario")){
+    		return true;
+    	}
+		return false;
+	}
+	
+	private boolean isAuthenticatedUser(HttpServletRequest httpReq) {
+		return httpReq.getSession().getAttribute("perfil") != null;
 	}
 
 	@Override

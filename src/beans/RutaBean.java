@@ -6,19 +6,19 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import clasesUtiles.DAOFactory;
 import misClases.Actividad;
 import misClases.Coordenada;
 import misClases.Dificultad;
 import misClases.Formato;
 import misClases.Privacidad;
+import misClases.Puntaje;
 import misClases.Ruta;
 import misClases.Usuario;
 import servicios.ActividadService;
+import servicios.PuntajeService;
 import servicios.RutaService;
+
 
 public class RutaBean {
 
@@ -27,9 +27,13 @@ public class RutaBean {
 	private List<Dificultad> dificultades;
 	private List<Formato> formatos;
 	private List<Privacidad> privacidades;
+	private Usuario usuarioActivo;
+	private Map<String,Object> session;
+	private List<Ruta> listaRutas;
+	private RutaService rutaService = new RutaService();
+	private PuntajeService puntajeService = new PuntajeService();
+	private Integer puntajeRuta;
 	
-	List<Ruta> listaRutas;
-	RutaService rutaService = new RutaService();	
 	
 	public RutaBean (){
 		this.actividades = new ActividadService().recuperarHabilitadas();
@@ -42,6 +46,8 @@ public class RutaBean {
 		ruta.setFormato(new Formato());
 		ruta.setActividad(new Actividad());
 		listaRutas = rutaService.recuperarTodas();
+		session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		usuarioActivo = (Usuario)session.get("perfil");
 	}
 	
 	@PostConstruct
@@ -51,11 +57,52 @@ public class RutaBean {
 	}
 	
 	public boolean esRutaPropia(Ruta ruta){
-		Map<String,Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-		Usuario usuario = (Usuario)session.get("perfil");
-		return rutaService.esRutaDeEsteUsuario(ruta.getId_ruta(),usuario.getId_perfil());
+		return rutaService.esRutaDeEsteUsuario(ruta.getId_ruta(),usuarioActivo.getId_perfil());
 	}
-
+	
+	public boolean yoLaHice (Ruta ruta){
+		return puntajeService.hizoEsteUsuarioEstaRuta(usuarioActivo.getId_perfil(), ruta.getId_ruta());
+	}
+	
+	public boolean yoLaPuntee(Ruta ruta){
+		return puntajeService.esteUsarioPuntuoEstaRuta(usuarioActivo.getId_perfil(), ruta.getId_ruta());
+	}
+	
+	public String puntuarRuta(Ruta ruta){
+		this.ruta = rutaService.recuperar(ruta.getId_ruta());
+		return "usuarioPuntuarRuta.xhtml";
+	}
+	
+	public void eliminarPuntuacionDeRuta (Ruta ruta){
+		Puntaje puntaje = puntajeService.obtenerPuntaje(usuarioActivo.getId_perfil(),ruta.getId_ruta());
+		puntajeService.eliminarPuntaje(puntaje);
+	}
+	
+	public String guardarPuntuacionParaRuta(){
+		Puntaje puntaje = new Puntaje();
+		puntaje.setUsuario(usuarioActivo);
+		puntaje.setRuta(this.ruta);
+		puntaje.setPuntuacion(this.puntajeRuta);
+		puntajeService.guardarPuntaje(puntaje);
+		return "usuarioAdministrarRutas.xhtml";
+	}
+	
+	public void marcarComoHecha (Ruta ruta){
+		if (! puntajeService.hizoEsteUsuarioEstaRuta(usuarioActivo.getId_perfil(),ruta.getId_ruta())){
+			Puntaje puntaje = new Puntaje();
+			puntaje.setRuta(ruta);
+			puntaje.setUsuario(usuarioActivo);
+			puntajeService.guardarPuntaje(puntaje);
+		}
+		
+	}
+	
+	public void marcarComoNoHecha(Ruta ruta){
+		Puntaje puntaje = puntajeService.obtenerPuntajeConPuntuacionNull(usuarioActivo.getId_perfil(),ruta.getId_ruta());
+		puntajeService.eliminarPuntaje(puntaje);
+	}
+		
+		
 	public Ruta getRuta() {
 		return ruta;
 	}
@@ -97,10 +144,20 @@ public class RutaBean {
 	}
 
 	public void alta (){
-		Map<String,Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		Collection<Coordenada> coordenadas = (List<Coordenada>) session.get("coordenadas");
 		ruta.setCoordenadas(coordenadas);
 		rutaService.guardarRuta(ruta);
 	}
+
+	public Integer getPuntajeRuta() {
+		return puntajeRuta;
+	}
+
+	public void setPuntajeRuta(Integer puntajeRuta) {
+		this.puntajeRuta = puntajeRuta;
+	}
+	
+	
+	 
 	
 }

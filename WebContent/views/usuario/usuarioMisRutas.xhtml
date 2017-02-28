@@ -18,9 +18,9 @@
 					<th data-column-id="descripcion" data-type="string">Descripcion</th>
 					<th data-column-id="actividad" data-type="string">Actividad</th>
 					<th data-column-id="fecha" data-type="date">Fecha</th>
-					<th data-column-id="yoLaHice" data-type="string">Yo La Hice</th>
-					<th data-column-id="puntuar" data-type="date">Puntuar</th>
 					<th data-column-id="ver+" data-formatter="ver+">Ver +</th>
+					<th data-column-id="editar">Editar Ruta</th>
+					<th data-column-id="eliminar">Eliminar</th>
 					
 				</tr>
 			</thead>
@@ -31,38 +31,34 @@
 						<td><h:outputText value="#{r.descripcion}"/></td>
 						<td><h:outputText value="#{r.actividad.nombre}"/></td>
 						<td><h:outputText value="#{r.fecha_realizacion}"/></td>
-						<c:if test="#{RutaBean.yoLaHice(r) eq 'true'}">
-							<td>
-								<h:form>
-									<h:commandLink id="submit" action="#{RutaBean.marcarComoNoHecha(r)}" value="Desmarcar" />
-								</h:form>
-							</td>
-						</c:if>
-						<c:if test="#{RutaBean.yoLaHice(r) eq 'false'}">
-							<td>
-								<h:form>
-									<h:commandLink id="submit" action="#{RutaBean.marcarComoHecha(r)}" value="Marcar como hecha" />
-								</h:form>
-							</td>
-						</c:if> 
-						
-						<c:if test="#{RutaBean.yoLaPuntee(r) eq 'true'}">
-							<td>
-								<h:form>
-									<h:commandLink id="submit" action="#{RutaBean.eliminarPuntuacionDeRuta(r)}" value="Quitar puntaje" />
-								</h:form>
-							</td>
-						</c:if>
-						<c:if test="#{RutaBean.yoLaPuntee(r) eq 'false'}">
-							<td>
-								<h:form>
-									<h:commandLink id="submit" action="#{RutaBean.puntuarRuta(r)}" value="Puntuar" />
-								</h:form>
-							</td>
-						</c:if> 
 						<td>
 							<h:form>
 								<h:commandLink id="submit" action="#{RutaBean.verMas(r)}" value="Ver+" />
+							</h:form>
+						</td>
+						<c:if test="${RutaBean.esRutaPropia(r) eq 'true'}">
+							<td>
+							<h:form>
+								<h:commandLink id="submit" action="#{RutaBean.editarRuta(r)}" value="Editar" />
+							</h:form>
+							</td>
+						</c:if>
+						<c:if test="${RutaBean.esRutaPropia(r) eq 'false'}">
+							<td><h:outputText value="Solo Ruta Propia"/></td>
+						</c:if>
+						<c:if test="${RutaBean.esRutaPropia(r) eq 'true'}">
+							<td>
+							<h:form>
+								<h:commandLink id="submit" action="#{RutaBean.eliminarRuta(r)}" value="Eliminar" />
+							</h:form>
+							</td>
+						</c:if>
+						<c:if test="${RutaBean.esRutaPropia(r) eq 'false'}">
+							<td><h:outputText value="Solo Ruta Propia"/></td>
+						</c:if>
+						<td>
+							<h:form>
+								<h:commandLink id="submit" action="#{RutaBean.eliminarRuta(r)}" value="ELiminar Ruta" />
 							</h:form>
 						</td>
 					</tr>

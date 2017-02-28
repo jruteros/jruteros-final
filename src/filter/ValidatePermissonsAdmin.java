@@ -29,20 +29,26 @@ public class ValidatePermissonsAdmin implements Filter {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 	    HttpServletResponse httpResp = (HttpServletResponse) response;
 	    //System.out.println("Interepto Admin");
-	    if (validateAdmin(httpReq)){
-	    	chain.doFilter(request, response);
+	    if (isAuthenticatedUser(httpReq)){
+		    if (isAdmin(httpReq)){
+		    	chain.doFilter(request, response);
+		    }else 
+		    	httpResp.sendRedirect(httpReq.getContextPath()+"/views/errorPermiso.xhtml");
+	    }else {
+	    	httpResp.sendRedirect(httpReq.getContextPath()+"/errorAutenticacion.xhtml");
 	    }
-	    else 
-	    	httpResp.sendRedirect(httpReq.getContextPath()+"/views/errorPermiso.xhtml");
 	}	
 	
-	private boolean validateAdmin (HttpServletRequest httpReq){
-		if (httpReq.getSession().getAttribute("perfil") != null){
-	    	Perfil perfil = (Perfil) httpReq.getSession().getAttribute("perfil");
-	    	if (perfil.getClass().getSimpleName().equals("Administrador")){
-	    		return true;
-	    	}
-	    }return false;
+	private boolean isAuthenticatedUser(HttpServletRequest httpReq) {
+		return httpReq.getSession().getAttribute("perfil") != null;
+	}
+
+	private boolean isAdmin (HttpServletRequest httpReq){
+    	Perfil perfil = (Perfil) httpReq.getSession().getAttribute("perfil");
+    	if (perfil.getClass().getSimpleName().equals("Administrador")){
+    		return true;
+    	}
+    	return false;
 		
 	}
 

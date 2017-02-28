@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	template="/WEB-INF/facelets/templates/defaultVista.xhtml">
+	
+	<ui:define name="menu">
+		<ui:include src="#{menu}" />
+	</ui:define>
+	
+	<ui:define name="contenido">
+		<div id="login">
+			<h2>Puntuar Ruta</h2>
+			<h:form id="formulario">
+				<fieldset>
+					<div>
+						<h:message for="formu" />
+					</div>
+						
+						<h:inputHidden id="idRutaActual"  hidden="true" value="#{RutaBean.ruta.id_ruta}" >
+						</h:inputHidden>				
+						<h:outputLabel id="labelPuntaje" for="puntaje">Puntaje :</h:outputLabel>
+						<h:selectOneMenu id="puntaje" value="#{RutaBean.puntajeRuta}">
+						   <f:selectItem itemValue="1" itemLabel="1" />
+						   <f:selectItem itemValue="2" itemLabel="2" />	
+						   <f:selectItem itemValue="3" itemLabel="3" />
+						   <f:selectItem itemValue="4" itemLabel="4" />	
+						   <f:selectItem itemValue="5" itemLabel="5" />   							
+						</h:selectOneMenu>
+					
+									
+					<h:commandButton action="#{RutaBean.guardarPuntuacionParaRuta()}" value="Guardar" />
+					<a href="usuarioAdministrarRutas.xhtml" class="btn btn-default" >Volver</a>
+				</fieldset>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
