@@ -31,35 +31,40 @@
 						<td><h:outputText value="#{r.descripcion}"/></td>
 						<td><h:outputText value="#{r.actividad.nombre}"/></td>
 						<td><h:outputText value="#{r.fecha_realizacion}"/></td>
-						<c:if test="#{RutaBean.yoLaHice(r) eq 'true'}">
-							<td>
-								<h:form>
-									<h:commandLink id="submit" action="#{RutaBean.marcarComoNoHecha(r)}" value="Desmarcar" />
-								</h:form>
-							</td>
-						</c:if>
-						<c:if test="#{RutaBean.yoLaHice(r) eq 'false'}">
-							<td>
-								<h:form>
-									<h:commandLink id="submit" action="#{RutaBean.marcarComoHecha(r)}" value="Marcar como hecha" />
-								</h:form>
-							</td>
-						</c:if> 
+						<c:choose>
+							<c:when test="#{RutaBean.yoLaHice(r) eq 'true'}">
+								<td>
+									<h:form>
+										<h:commandLink id="submit" action="#{RutaBean.marcarComoNoHecha(r)}" value="Desmarcar" />
+									</h:form>
+								</td>
+							</c:when >
+							<c:otherwise>
+   								 <td>
+									<h:form>
+										<h:commandLink id="submit" action="#{RutaBean.marcarComoHecha(r)}" value="Marcar como hecha" />
+									</h:form>
+								</td>
+  							</c:otherwise>
+						</c:choose>
 						
-						<c:if test="#{RutaBean.yoLaPuntee(r) eq 'true'}">
-							<td>
-								<h:form>
-									<h:commandLink id="submit" action="#{RutaBean.eliminarPuntuacionDeRuta(r)}" value="Quitar puntaje" />
-								</h:form>
-							</td>
-						</c:if>
-						<c:if test="#{RutaBean.yoLaPuntee(r) eq 'false'}">
-							<td>
-								<h:form>
-									<h:commandLink id="submit" action="#{RutaBean.puntuarRuta(r)}" value="Puntuar" />
-								</h:form>
-							</td>
-						</c:if> 
+						<c:choose>
+							<c:when test="#{RutaBean.yoLaPuntee(r) eq 'true'}">
+								<td>
+									<h:form>
+										<h:commandLink id="submit" action="#{RutaBean.eliminarPuntuacionDeRuta(r)}" value="Quitar puntaje" />
+									</h:form>
+								</td>
+							</c:when >
+							<c:otherwise>
+   								 <td>
+									<h:form>
+										<h:commandLink id="submit" action="#{RutaBean.puntuarRuta(r)}" value="Puntuar" />
+									</h:form>
+								</td>
+  							</c:otherwise>
+						</c:choose>
+											
 						<td>
 							<h:form>
 								<h:commandLink id="submit" action="#{RutaBean.verMas(r)}" value="Ver+" />

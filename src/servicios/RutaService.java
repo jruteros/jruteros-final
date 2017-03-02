@@ -2,13 +2,10 @@ package servicios;
 
 import java.util.List;
 
-import javax.annotation.ManagedBean;
-
 import clasesUtiles.DAOFactory;
 import interfacesDAO.RutaDAO;
 import misClases.Ruta;
 
-@ManagedBean
 public class RutaService {
 	private RutaDAO rutaDAO;
 	
