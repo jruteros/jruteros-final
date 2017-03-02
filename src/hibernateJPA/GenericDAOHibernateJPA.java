@@ -6,12 +6,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import clasesUtiles.EMF;
 import interfacesDAO.GenericDAO;
 
-@Transactional
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 protected Class<T> persistentClass;
 	public GenericDAOHibernateJPA(){}

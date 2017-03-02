@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.inject.Singleton;
 
-@Singleton
+//@Singleton
 public class CoordenadaDAO {
 	private Map<String, Coordenada> coordenadas = new LinkedHashMap<String, Coordenada>();
 

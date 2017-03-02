@@ -7,7 +7,6 @@ import javax.annotation.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import clasesUtiles.EMF;
 import interfacesDAO.PuntajeDAO;
@@ -82,6 +81,4 @@ public class PuntajeDAOHibernateJPA extends GenericDAOHibernateJPA<Puntaje> impl
 		}
 		return resultado;
 	}
-
-
 }

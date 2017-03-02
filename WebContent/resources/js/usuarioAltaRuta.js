@@ -146,6 +146,7 @@ function limpiarMapa() {
 	});
 
 }
+$('#limpiarMapa').click(limpiarMapa);
 
 function borrarMarker(id) {
 	console.log("borrar marker " + id);

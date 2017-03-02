@@ -12,9 +12,9 @@ public class Coordenada {
 	@Id @GeneratedValue
 	private Long id_coordenada;
 	
-	private Float latitud;
+	private Double latitud;
 	
-	private Float longitud;
+	private Double longitud;
 	
 	@ManyToOne(optional = true)
 	@JoinColumn(name="id_ruta")
@@ -22,7 +22,7 @@ public class Coordenada {
 	
 	public Coordenada() {}
 	
-	public Coordenada(Float latitud, Float longitud, Ruta ruta) {
+	public Coordenada(Double latitud, Double longitud, Ruta ruta) {
 		this.setLatitud(latitud);
 		this.setLongitud(longitud);
 		this.setRuta(ruta);
@@ -36,22 +36,22 @@ public class Coordenada {
 		this.id_coordenada = id_coordenada;
 	}
 	
-	public Float getLatitud() {
+	public Double getLatitud() {
 		return latitud;
 	}
-	
-	public void setLatitud(Float latitud) {
+
+	public void setLatitud(Double latitud) {
 		this.latitud = latitud;
 	}
-	
-	public Float getLongitud() {
+
+	public Double getLongitud() {
 		return longitud;
 	}
-	
-	public void setLongitud(Float longitud) {
+
+	public void setLongitud(Double longitud) {
 		this.longitud = longitud;
 	}
-	
+
 	public Ruta getRuta() {
 		return ruta;
 	}

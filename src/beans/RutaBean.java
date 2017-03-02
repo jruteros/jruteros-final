@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -8,13 +9,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import clasesUtiles.DAOFactory;
 import misClases.Actividad;
-import misClases.Coordenada;
 import misClases.Dificultad;
 import misClases.Formato;
 import misClases.Privacidad;
 import misClases.Puntaje;
 import misClases.Ruta;
 import misClases.Usuario;
+import rest.jersey.Coordenada;
 import servicios.ActividadService;
 import servicios.PuntajeService;
 import servicios.RutaService;
@@ -143,10 +144,13 @@ public class RutaBean {
 		this.listaRutas = listaRutas;
 	}
 
-	public void alta (){
+	public String alta (){
 		Collection<Coordenada> coordenadas = (List<Coordenada>) session.get("coordenadas");
-		ruta.setCoordenadas(coordenadas);
+		for (Coordenada coor: coordenadas) {
+			ruta.agregarCoordenada(coor.getLat(), coor.getLon());
+		}
 		rutaService.guardarRuta(ruta);
+		return "usuarioAdministrarRutas.xhtml";
 	}
 
 	public Integer getPuntajeRuta() {

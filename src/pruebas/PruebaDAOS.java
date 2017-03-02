@@ -184,55 +184,55 @@ public class PruebaDAOS extends HttpServlet {
 
 		Ruta ruta1 = new Ruta("Montañas blancas", "Paseo por las montañas nevadas de Mendoza", (float) 34.08, 
 				timeruta1, dateruta1, nacho, soloIda, carreraMontaña, dificil, publica);
-		ruta1.agregarCoordenada((float) 34.01, (float) 33.05);
-		ruta1.agregarCoordenada((float) 34.02, (float) 33.05);
-		ruta1.agregarCoordenada((float) 34.03, (float) 33.05);
-		ruta1.agregarCoordenada((float) 34.04, (float) 33.05);
-		ruta1.agregarCoordenada((float) 34.05, (float) 33.05);
-		ruta1.agregarCoordenada((float) 34.06, (float) 33.05);
-		ruta1.agregarCoordenada((float) 34.07, (float) 33.04);
-		ruta1.agregarCoordenada((float) 34.08, (float) 33.04);
+		ruta1.agregarCoordenada((double) 34.01, (double) 33.05);
+		ruta1.agregarCoordenada((double) 34.02, (double) 33.05);
+		ruta1.agregarCoordenada((double) 34.03, (double) 33.05);
+		ruta1.agregarCoordenada((double) 34.04, (double) 33.05);
+		ruta1.agregarCoordenada((double) 34.05, (double) 33.05);
+		ruta1.agregarCoordenada((double) 34.06, (double) 33.05);
+		ruta1.agregarCoordenada((double) 34.07, (double) 33.04);
+		ruta1.agregarCoordenada((double) 34.08, (double) 33.04);
 		Ruta ruta2 = new Ruta("A caballo por la playa", "A caballo por la playa", (float) 34.08, 
 				timeruta2, dateruta2, nacho, circular, aCaballo, facil, publica);
-		ruta2.agregarCoordenada((float) -34.01, (float) 33.00);
-		ruta2.agregarCoordenada((float) -34.11, (float) 33.01);
-		ruta2.agregarCoordenada((float) -34.21, (float) 33.02);
-		ruta2.agregarCoordenada((float) -34.31, (float) 33.03);
-		ruta2.agregarCoordenada((float) -34.41, (float) 33.04);
-		ruta2.agregarCoordenada((float) -34.51, (float) 33.05);
-		ruta2.agregarCoordenada((float) -34.41, (float) 33.04);
-		ruta2.agregarCoordenada((float) -34.31, (float) 33.03);
-		ruta2.agregarCoordenada((float) -34.21, (float) 33.02);
-		ruta2.agregarCoordenada((float) -34.11, (float) 33.01);
-		ruta2.agregarCoordenada((float) -34.01, (float) 33.00);
+		ruta2.agregarCoordenada((double) -34.01, (double) 33.00);
+		ruta2.agregarCoordenada((double) -34.11, (double) 33.01);
+		ruta2.agregarCoordenada((double) -34.21, (double) 33.02);
+		ruta2.agregarCoordenada((double) -34.31, (double) 33.03);
+		ruta2.agregarCoordenada((double) -34.41, (double) 33.04);
+		ruta2.agregarCoordenada((double) -34.51, (double) 33.05);
+		ruta2.agregarCoordenada((double) -34.41, (double) 33.04);
+		ruta2.agregarCoordenada((double) -34.31, (double) 33.03);
+		ruta2.agregarCoordenada((double) -34.21, (double) 33.02);
+		ruta2.agregarCoordenada((double) -34.11, (double) 33.01);
+		ruta2.agregarCoordenada((double) -34.01, (double) 33.00);
 		
 		Ruta ruta3 = new Ruta("Ruta 66", "Linda Ruta", (float) 34.08, 
 				timeruta2, dateruta2, nacho, circular, carreraMontaña, facil, publica);
-		ruta3.agregarCoordenada((float) -34.01, (float) 33.00);
-		ruta3.agregarCoordenada((float) -34.11, (float) 33.01);
-		ruta3.agregarCoordenada((float) -34.21, (float) 33.02);
-		ruta3.agregarCoordenada((float) -34.31, (float) 33.03);
-		ruta3.agregarCoordenada((float) -34.41, (float) 33.04);
-		ruta3.agregarCoordenada((float) -34.51, (float) 33.05);
-		ruta3.agregarCoordenada((float) -34.41, (float) 33.04);
-		ruta3.agregarCoordenada((float) -34.31, (float) 33.03);
-		ruta3.agregarCoordenada((float) -34.21, (float) 33.02);
-		ruta3.agregarCoordenada((float) -34.11, (float) 33.01);
-		ruta3.agregarCoordenada((float) -34.01, (float) 33.00);
+		ruta3.agregarCoordenada((double) -34.01, (double) 33.00);
+		ruta3.agregarCoordenada((double) -34.11, (double) 33.01);
+		ruta3.agregarCoordenada((double) -34.21, (double) 33.02);
+		ruta3.agregarCoordenada((double) -34.31, (double) 33.03);
+		ruta3.agregarCoordenada((double) -34.41, (double) 33.04);
+		ruta3.agregarCoordenada((double) -34.51, (double) 33.05);
+		ruta3.agregarCoordenada((double) -34.41, (double) 33.04);
+		ruta3.agregarCoordenada((double) -34.31, (double) 33.03);
+		ruta3.agregarCoordenada((double) -34.21, (double) 33.02);
+		ruta3.agregarCoordenada((double) -34.11, (double) 33.01);
+		ruta3.agregarCoordenada((double) -34.01, (double) 33.00);
 		
 		Ruta ruta4 = new Ruta("Ruta 44", "Preciosa Ruta", (float) 34.08, 
 				timeruta2, dateruta2, nacho, soloIda, carreraMontaña, dificil, publica);
-		ruta4.agregarCoordenada((float) -34.01, (float) 33.00);
-		ruta4.agregarCoordenada((float) -34.11, (float) 33.01);
-		ruta4.agregarCoordenada((float) -34.21, (float) 33.02);
-		ruta4.agregarCoordenada((float) -34.31, (float) 33.03);
-		ruta4.agregarCoordenada((float) -34.41, (float) 33.04);
-		ruta4.agregarCoordenada((float) -34.51, (float) 33.05);
-		ruta4.agregarCoordenada((float) -34.41, (float) 33.04);
-		ruta4.agregarCoordenada((float) -34.31, (float) 33.03);
-		ruta4.agregarCoordenada((float) -34.21, (float) 33.02);
-		ruta4.agregarCoordenada((float) -34.11, (float) 33.01);
-		ruta4.agregarCoordenada((float) -34.01, (float) 33.00);
+		ruta4.agregarCoordenada((double) -34.01, (double) 33.00);
+		ruta4.agregarCoordenada((double) -34.11, (double) 33.01);
+		ruta4.agregarCoordenada((double) -34.21, (double) 33.02);
+		ruta4.agregarCoordenada((double) -34.31, (double) 33.03);
+		ruta4.agregarCoordenada((double) -34.41, (double) 33.04);
+		ruta4.agregarCoordenada((double) -34.51, (double) 33.05);
+		ruta4.agregarCoordenada((double) -34.41, (double) 33.04);
+		ruta4.agregarCoordenada((double) -34.31, (double) 33.03);
+		ruta4.agregarCoordenada((double) -34.21, (double) 33.02);
+		ruta4.agregarCoordenada((double) -34.11, (double) 33.01);
+		ruta4.agregarCoordenada((double) -34.01, (double) 33.00);
 		
 		
 		

@@ -130,7 +130,6 @@ input[type="radio"], input[type="checkbox"] {
 	display:block;
 }
 
-
 #formu {
 	margin: auto;
 	width: 70%;
@@ -170,7 +169,6 @@ input[type="radio"], input[type="checkbox"] {
 #formu fieldset div {
 	color: #777;
 	margin-bottom: 14px;
-	margin-top:10px;
 }
 
 #formu fieldset div:last-child {
@@ -208,6 +206,10 @@ input[type="radio"], input[type="checkbox"] {
 #formu fieldset label {
 	width: 35%;
 	text-align: right;
+}
+
+#formu fieldset div #googleMap{
+	margin-top:0px !important;	
 }
 
 #crearNueva {
