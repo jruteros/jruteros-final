@@ -1,5 +1,6 @@
 package rest.jersey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,8 +21,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
 
+import misClases.Perfil;
+import misClases.Usuario;
+
 @Path("rutas/")
-@Singleton
 public class CoordenadasResource {
 	
 	@Context
@@ -42,7 +45,10 @@ public class CoordenadasResource {
 	@Path("coordenadas/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Coordenada> getCoordenadasAsHtml() {
-		return coordenadaService.getCoordenadasList();
+		Perfil usuario = (Usuario) httpRequest.getSession().getAttribute("perfil");
+		List<Coordenada> coordenadas = (List<Coordenada>)httpRequest.getSession().getAttribute("coordenadasRojas");
+		//return coordenadaService.getCoordenadasList();
+		return coordenadas;
 	}
 	
 	@GET
@@ -63,8 +69,12 @@ public class CoordenadasResource {
 	public void agregarCoordenada(@QueryParam("lat") Double lat,
             @QueryParam("lon") Double lon ){
 		Coordenada coordenada = new Coordenada(lat,lon);
-		coordenadaService.crearCoordenada(coordenada);
-		httpRequest.getSession().setAttribute("coordenadas", coordenadaService.getCoordenadasList());
+		//coordenadaService.crearCoordenada(coordenada);
+		Perfil usuario = (Usuario) httpRequest.getSession().getAttribute("perfil");
+		List<Coordenada> coordenadas = (List<Coordenada>)httpRequest.getSession().getAttribute("coordenadas"+usuario.getApellido());
+		coordenadas.add(coordenada);
+		
+		httpRequest.getSession().setAttribute("coordenadas"+usuario.getApellido(), coordenadas);
 	}
 	
 	@DELETE
@@ -73,6 +83,8 @@ public class CoordenadasResource {
 	public Coordenada eliminarTodo(){
 		Coordenada coordenada = coordenadaService.getCoordenadasList().get(0);
 		coordenadaService.eliminarTodo();
+		Perfil usuario = (Usuario) httpRequest.getSession().getAttribute("perfil");
+		httpRequest.getSession().setAttribute("coordenadas"+usuario.getApellido(), new ArrayList<Coordenada>());
 		return coordenada;
 	}
 
