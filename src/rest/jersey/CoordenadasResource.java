@@ -46,7 +46,7 @@ public class CoordenadasResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Coordenada> getCoordenadasAsHtml() {
 		Perfil usuario = (Usuario) httpRequest.getSession().getAttribute("perfil");
-		List<Coordenada> coordenadas = (List<Coordenada>)httpRequest.getSession().getAttribute("coordenadasRojas");
+		List<Coordenada> coordenadas = (List<Coordenada>)httpRequest.getSession().getAttribute("coordenadas"+usuario.getApellido());
 		//return coordenadaService.getCoordenadasList();
 		return coordenadas;
 	}
