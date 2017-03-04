@@ -25,6 +25,7 @@ import misClases.Perfil;
 import misClases.Usuario;
 
 @Path("rutas/")
+@Singleton
 public class CoordenadasResource {
 	
 	@Context
@@ -69,11 +70,9 @@ public class CoordenadasResource {
 	public void agregarCoordenada(@QueryParam("lat") Double lat,
             @QueryParam("lon") Double lon ){
 		Coordenada coordenada = new Coordenada(lat,lon);
-		//coordenadaService.crearCoordenada(coordenada);
+		coordenadaService.crearCoordenada(coordenada);
 		Perfil usuario = (Usuario) httpRequest.getSession().getAttribute("perfil");
-		List<Coordenada> coordenadas = (List<Coordenada>)httpRequest.getSession().getAttribute("coordenadas"+usuario.getApellido());
-		coordenadas.add(coordenada);
-		
+		List<Coordenada> coordenadas = coordenadaService.getCoordenadasList();
 		httpRequest.getSession().setAttribute("coordenadas"+usuario.getApellido(), coordenadas);
 	}
 	

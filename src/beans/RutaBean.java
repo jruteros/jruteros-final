@@ -1,6 +1,5 @@
 package beans;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -145,11 +144,13 @@ public class RutaBean {
 	}
 
 	public String alta (){
-		Collection<Coordenada> coordenadas = (List<Coordenada>) session.get("coordenadas");
+		Collection<Coordenada> coordenadas = (List<Coordenada>) session.get("coordenadas"+usuarioActivo.getApellido());
 		for (Coordenada coor: coordenadas) {
 			ruta.agregarCoordenada(coor.getLat(), coor.getLon());
 		}
+		ruta.setUsuario(usuarioActivo);
 		rutaService.guardarRuta(ruta);
+		listaRutas = rutaService.recuperarTodas();
 		return "usuarioAdministrarRutas.xhtml";
 	}
 

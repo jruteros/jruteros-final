@@ -44,5 +44,19 @@ public class RutaDAOHibernateJPA extends GenericDAOHibernateJPA<Ruta> implements
 		}
 		return !resultado.isEmpty();
 	}
+
+	@Override
+	public List<Ruta> recuperarTodasMisRutas(Long idUsuario) {
+		EntityManager emf = EMF.getEMF().createEntityManager();
+		List<Ruta> resultado = null;
+		try{
+			Query consulta = EMF.getEMF().createEntityManager().createQuery("select r from Ruta r where r.usuario.id_perfil = ?1");
+			consulta.setParameter(1, idUsuario);
+		    resultado = (List<Ruta>) consulta.getResultList();
+		}finally {
+			emf.close();
+		}
+		return resultado;
+	}
 	
 }

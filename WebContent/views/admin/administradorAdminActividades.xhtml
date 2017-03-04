@@ -18,8 +18,8 @@
 					<th data-column-id="nombreActividad" data-order="asc">Nombre de Actividad</th>
 					<th data-column-id="editarActividad" data-order="asc">Editar Nombre</th>
 					<th data-column-id="verRutas" data-formatter="ver+">Ver Rutas Asociadas</th>
-					<th data-column-id="deshabilitar">Deshabilitado</th>
-					<th data-column-id="habilitar">Habilitado</th>
+					<th data-column-id="deshabilitar">Deshabilitar</th>
+					<th data-column-id="habilitar">Habilitar</th>
 					
 				</tr>
 			</thead>
@@ -37,15 +37,8 @@
 							<h:commandLink id="submit" action="#{ActividadBean.verRutasAsociadas(a)}" value="Ver Rutas Asociadas" />
 						</h:form>
 						</td>
-						<c:if test="${a.habilitada eq 'true'}">
-							<td><h:outputText value="-"/></td>
-						</c:if>
 						<c:if test="${a.habilitada eq 'false'}">
-							<td>
-							<h:form>
-							<h:commandLink id="submit" action="#{ActividadBean.habilitar(a)}" value="Habilitar" />
-							</h:form>
-							</td>
+							<td><h:outputText value="-"/></td>
 						</c:if>
 						<c:if test="${a.habilitada eq 'true'}">
 							<td>
@@ -55,6 +48,13 @@
 							</td>
 						</c:if>
 						<c:if test="${a.habilitada eq 'false'}">
+							<td>
+							<h:form>
+							<h:commandLink id="submit" action="#{ActividadBean.habilitar(a)}" value="Habilitar" />
+							</h:form>
+							</td>
+						</c:if>
+						<c:if test="${a.habilitada eq 'true'}">
 							<td><h:outputText value="-"/></td>
 						</c:if>
 					</tr>

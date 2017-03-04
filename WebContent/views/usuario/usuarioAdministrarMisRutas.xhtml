@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	template="/WEB-INF/facelets/templates/defaultVista.xhtml">
+	
+	<ui:define name="menu">
+		<ui:include src="#{menu}" />
+	</ui:define>
+	<ui:define name="contenido">
+	<div class="container">
+		<table id="grid-data-api" class="table table-striped" data-toggle="bootgrid">
+			<thead>
+				<tr>
+					<th data-column-id="nombreRuta" data-order="asc">Nombre de la Ruta</th>
+					<th data-column-id="descripcion" data-type="string">Descripcion</th>
+					<th data-column-id="actividad" data-type="string">Actividad</th>
+					<th data-column-id="fecha" data-type="date">Fecha</th>
+					<th data-column-id="editar" data-type="string">Editar</th>
+					<th data-column-id="eliminar" data-type="date">Eliminar</th>
+					<th data-column-id="ver+" data-formatter="ver+">Ver +</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="#{MisRutasBean.misRutas}" var="r">
+					<tr>
+						<td><h:outputText value="#{r.nombre}"/></td>
+						<td><h:outputText value="#{r.descripcion}"/></td>
+						<td><h:outputText value="#{r.actividad.nombre}"/></td>
+						<td><h:outputText value="#{r.fecha_realizacion}"/></td>
+						<td>
+							<h:form>
+								<h:commandLink id="submit" action="#{MisRutasBean.editarRuta(r)}" value="Editar" />
+							</h:form>
+						</td>
+						<td>
+							<h:form>
+								<h:commandLink id="submit" onclick="return confirm('¿Estás seguro que deseas eliminar la ruta?');" action="#{MisRutasBean.eliminarRuta(r)}" value="Eliminar" />
+							</h:form>
+						</td>
+										
+						<td>
+							<h:form>
+								<h:commandLink id="submit" action="#{MisRutasBean.verMas(r)}" value="Ver+" />
+							</h:form>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+  		</table>
+  		<a href="usuarioAltaRuta.xhtml" class="btn btn-default" >Nueva Ruta</a>
+		<h:outputScript name="jqueryBootgrid/jquery.bootgrid.js" />
+	</div>
+	</ui:define>
+</ui:composition>

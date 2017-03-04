@@ -21,6 +21,10 @@ public class RutaService {
 		return rutaDAO.recuperarTodos();
 	}
 	
+	public List<Ruta> recuperarTodasMisRutas(Long idUsuario){
+		return rutaDAO.recuperarTodasMisRutas(idUsuario);
+	}
+	
 	public boolean esRutaDeEsteUsuario(Long idRuta,Long idUsuario){
 		return rutaDAO.esRutaDeEsteUsuario(idRuta, idUsuario);
 	}
@@ -35,5 +39,9 @@ public class RutaService {
 	
 	public void actualizar (Ruta ruta){
 		this.rutaDAO.actualizar(ruta);
+	}
+	
+	public void eliminar (Ruta ruta){
+		this.rutaDAO.borrar(ruta);
 	}
 }

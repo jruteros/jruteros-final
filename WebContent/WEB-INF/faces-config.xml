@@ -101,4 +101,10 @@
 		<managed-bean-class>beans.RutaBean</managed-bean-class> 
 		<managed-bean-scope>request</managed-bean-scope> 
 	</managed-bean>
+	<managed-bean> 
+		<description>MisRutasBean</description> 
+		<managed-bean-name>MisRutasBean</managed-bean-name> 
+		<managed-bean-class>beans.MisRutasBean</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope> 
+	</managed-bean>
 </faces-config>
