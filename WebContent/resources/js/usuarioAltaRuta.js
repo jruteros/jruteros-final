@@ -163,6 +163,7 @@ function borrarMarker(id) {
 		type : "DELETE",
 		success : function(result) {
 			if (result =="undefined" || result == null )
+				$("#limpiarMapa").hide();
 				return ;
 			mapProp.center = new google.maps.LatLng(result.lat, result.lon);
 			initialize();

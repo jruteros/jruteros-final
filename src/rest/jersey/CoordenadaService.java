@@ -22,17 +22,16 @@ public class CoordenadaService {
 		List<Coordenada> coordenadasAsList = this.recuperarTodos(coordenadas);
 		//Si ya no hay mas coordenadas, devuelvo null
 		Coordenada coordenadaARetornar = null; 
-		//Si no es la ultima coordenada
-		if(coordenadas.size() > 1){
+		//Si hay mas de una coordenada, evaluo
+		if(coordenadasAsList.size() > 1){
 			int posicionCoordenadaABorrar = coordenadasAsList.indexOf(coordenadaAEliminar);
-			//Si no es la ultima, devuelvo la anterior coordenada
-			if (posicionCoordenadaABorrar >0){
-				coordenadaARetornar = coordenadasAsList.get(posicionCoordenadaABorrar -1); 
-			}
 			//Si es la ultima, devuelvo la coordenada siguiente
 			if(posicionCoordenadaABorrar == 0){
 				coordenadaARetornar = coordenadasAsList.get(1);
-			}
+			}else {
+				//Si no es la ultima, devuelvo la anterior coordenada
+				coordenadaARetornar = coordenadasAsList.get(posicionCoordenadaABorrar -1); 
+			}			
 		}
 		return coordenadaARetornar;
 	}
