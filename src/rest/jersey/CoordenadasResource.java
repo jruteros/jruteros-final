@@ -25,7 +25,6 @@ import misClases.Perfil;
 import misClases.Usuario;
 
 @Path("rutas/")
-@Singleton
 public class CoordenadasResource {
 	
 	@Context
@@ -36,18 +35,23 @@ public class CoordenadasResource {
 	
 	@Inject 
     HttpServletRequest httpRequest;
+	
+	List<Coordenada> coordenadas;
 	CoordenadaService coordenadaService;
 	
-	public CoordenadasResource(){
+	public CoordenadasResource(@Context HttpServletRequest httpRequest){
 		coordenadaService = new CoordenadaService();
+		coordenadas = (List<Coordenada>)httpRequest.getSession().getAttribute("coordenadas");
+		if (this.coordenadas == null){
+			this.coordenadas = new ArrayList<>();
+		}
+		
 	}
 	
 	@GET
 	@Path("coordenadas/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Coordenada> getCoordenadasAsHtml() {
-		Perfil usuario = (Usuario) httpRequest.getSession().getAttribute("perfil");
-		List<Coordenada> coordenadas = (List<Coordenada>)httpRequest.getSession().getAttribute("coordenadas"+usuario.getApellido());
 		//return coordenadaService.getCoordenadasList();
 		return coordenadas;
 	}
@@ -70,20 +74,16 @@ public class CoordenadasResource {
 	public void agregarCoordenada(@QueryParam("lat") Double lat,
             @QueryParam("lon") Double lon ){
 		Coordenada coordenada = new Coordenada(lat,lon);
-		coordenadaService.crearCoordenada(coordenada);
-		Perfil usuario = (Usuario) httpRequest.getSession().getAttribute("perfil");
-		List<Coordenada> coordenadas = coordenadaService.getCoordenadasList();
-		httpRequest.getSession().setAttribute("coordenadas"+usuario.getApellido(), coordenadas);
+		this.coordenadas.add(coordenada);
+		httpRequest.getSession().setAttribute("coordenadas", this.coordenadas);
 	}
 	
 	@DELETE
 	@Path("coordenadas/eliminarTodo")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coordenada eliminarTodo(){
-		Coordenada coordenada = coordenadaService.getCoordenadasList().get(0);
-		coordenadaService.eliminarTodo();
-		Perfil usuario = (Usuario) httpRequest.getSession().getAttribute("perfil");
-		httpRequest.getSession().setAttribute("coordenadas"+usuario.getApellido(), new ArrayList<Coordenada>());
+		Coordenada coordenada = this.coordenadas.get(this.coordenadas.size() - 1);
+		httpRequest.getSession().setAttribute("coordenadas", new ArrayList<Coordenada>());
 		return coordenada;
 	}
 

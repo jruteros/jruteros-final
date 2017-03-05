@@ -147,6 +147,8 @@ function limpiarMapa() {
 
 }
 $('#limpiarMapa').click(limpiarMapa);
+$('#submitAltaRuta').click(limpiarMapa);
+
 
 function borrarMarker(id) {
 	console.log("borrar marker " + id);
