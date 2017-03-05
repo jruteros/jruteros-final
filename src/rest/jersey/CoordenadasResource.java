@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,12 +29,15 @@ public class CoordenadasResource {
 	@Inject 
     HttpServletRequest httpRequest;
 	
+	HttpSession session;
+	
 	Map<String, Coordenada> coordenadas;
 	CoordenadaService coordenadaService;
 	
 	public CoordenadasResource(@Context HttpServletRequest httpRequest){
 		coordenadaService = new CoordenadaService();
-		coordenadas = (Map<String, Coordenada>)httpRequest.getSession().getAttribute("coordenadas");
+		this.session = httpRequest.getSession();
+		coordenadas = (Map<String, Coordenada>)this.session.getAttribute("coordenadas");
 		if (this.coordenadas == null){
 			this.coordenadas = new LinkedHashMap<String, Coordenada>();
 		}
@@ -53,7 +57,7 @@ public class CoordenadasResource {
             @QueryParam("lon") Double lon ){
 		Coordenada coordenada = new Coordenada(lat,lon);
 		coordenadaService.agregarCoordenada(coordenadas,coordenada);
-		httpRequest.getSession().setAttribute("coordenadas", this.coordenadas);
+		this.session.setAttribute("coordenadas", this.coordenadas);
 	}
 	
 	@DELETE
@@ -66,7 +70,7 @@ public class CoordenadasResource {
 			//Aca ver si devolver la primer o ultima coordenada (para dejarlo centrado)
 			ultimaCoordenada = this.getUltimaCoordenada(coordenadasAsList);
 		}
-		httpRequest.getSession().setAttribute("coordenadas", new LinkedHashMap<String, Coordenada>());
+		this.session.setAttribute("coordenadas", new LinkedHashMap<String, Coordenada>());
 		return ultimaCoordenada;
 	}
 

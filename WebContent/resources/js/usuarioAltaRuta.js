@@ -162,9 +162,10 @@ function borrarMarker(id) {
 		url : myURI + "coordenadas?id_coordenada=" + id + "",
 		type : "DELETE",
 		success : function(result) {
-			if (result =="undefined" || result == null )
+			if (result =="undefined" || result == null ){
 				$("#limpiarMapa").hide();
 				return ;
+			}
 			mapProp.center = new google.maps.LatLng(result.lat, result.lon);
 			initialize();
 		}
