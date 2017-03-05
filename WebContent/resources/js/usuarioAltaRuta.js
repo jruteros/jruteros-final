@@ -138,8 +138,9 @@ function limpiarMapa() {
 		url : myURI + "coordenadas/eliminarTodo",
 		type : "DELETE",
 		success : function(result) {
+			if (result =="undefined" || result == null )
+				return ;
 			mapProp.center = new google.maps.LatLng(result.lat, result.lon);
-
 			$("#limpiarMapa").hide();
 			initialize();
 		}
@@ -161,6 +162,8 @@ function borrarMarker(id) {
 		url : myURI + "coordenadas?id_coordenada=" + id + "",
 		type : "DELETE",
 		success : function(result) {
+			if (result =="undefined" || result == null )
+				return ;
 			mapProp.center = new google.maps.LatLng(result.lat, result.lon);
 			initialize();
 		}

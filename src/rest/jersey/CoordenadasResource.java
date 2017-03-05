@@ -1,30 +1,20 @@
 package rest.jersey;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
-
-import misClases.Perfil;
-import misClases.Usuario;
 
 @Path("rutas/")
 public class CoordenadasResource {
@@ -57,19 +47,6 @@ public class CoordenadasResource {
 		return coordenadaService.recuperarTodos(coordenadas);
 	}
 	
-	@GET
-	@Path("coordenadas/primerCoordenada")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Coordenada obtenerPrimerCoordenada() {
-		if (!(coordenadaService.getCoordenadasList().isEmpty())){
-			return coordenadaService.getCoordenadasList().get(0);
-		}
-		else{
-			Coordenada coordenada = new Coordenada(-34.9038055,-57.9392111);
-			return coordenada;
-		}
-	}
-	
 	@POST
 	@Path("coordenadas/")
 	public void agregarCoordenada(@QueryParam("lat") Double lat,
@@ -84,7 +61,11 @@ public class CoordenadasResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coordenada eliminarTodo(){
 		List<Coordenada> coordenadasAsList = coordenadaService.recuperarTodos(this.coordenadas);
-		Coordenada ultimaCoordenada = this.getUltimaCoordenada(coordenadasAsList);
+		Coordenada ultimaCoordenada = null;
+		if (!coordenadasAsList.isEmpty()){
+			//Aca ver si devolver la primer o ultima coordenada (para dejarlo centrado)
+			ultimaCoordenada = this.getUltimaCoordenada(coordenadasAsList);
+		}
 		httpRequest.getSession().setAttribute("coordenadas", new LinkedHashMap<String, Coordenada>());
 		return ultimaCoordenada;
 	}
@@ -97,7 +78,7 @@ public class CoordenadasResource {
 	}
 	
 	private Coordenada getUltimaCoordenada(List<Coordenada> coordenadas){
-		return coordenadas.get(coordenadas.size() - 1);
-		
+		return coordenadas.get(coordenadas.size() - 1);	
 	}
+	
 }
