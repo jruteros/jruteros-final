@@ -1,7 +1,9 @@
 package rest.jersey;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,16 +38,15 @@ public class CoordenadasResource {
 	@Inject 
     HttpServletRequest httpRequest;
 	
-	List<Coordenada> coordenadas;
+	Map<String, Coordenada> coordenadas;
 	CoordenadaService coordenadaService;
 	
 	public CoordenadasResource(@Context HttpServletRequest httpRequest){
 		coordenadaService = new CoordenadaService();
-		coordenadas = (List<Coordenada>)httpRequest.getSession().getAttribute("coordenadas");
+		coordenadas = (Map<String, Coordenada>)httpRequest.getSession().getAttribute("coordenadas");
 		if (this.coordenadas == null){
-			this.coordenadas = new ArrayList<>();
+			this.coordenadas = new LinkedHashMap<String, Coordenada>();
 		}
-		
 	}
 	
 	@GET
@@ -53,7 +54,7 @@ public class CoordenadasResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Coordenada> getCoordenadasAsHtml() {
 		//return coordenadaService.getCoordenadasList();
-		return coordenadas;
+		return coordenadaService.recuperarTodos(coordenadas);
 	}
 	
 	@GET
@@ -74,7 +75,7 @@ public class CoordenadasResource {
 	public void agregarCoordenada(@QueryParam("lat") Double lat,
             @QueryParam("lon") Double lon ){
 		Coordenada coordenada = new Coordenada(lat,lon);
-		this.coordenadas.add(coordenada);
+		coordenadaService.agregarCoordenada(coordenadas,coordenada);
 		httpRequest.getSession().setAttribute("coordenadas", this.coordenadas);
 	}
 	
@@ -82,16 +83,21 @@ public class CoordenadasResource {
 	@Path("coordenadas/eliminarTodo")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coordenada eliminarTodo(){
-		Coordenada coordenada = this.coordenadas.get(this.coordenadas.size() - 1);
-		httpRequest.getSession().setAttribute("coordenadas", new ArrayList<Coordenada>());
-		return coordenada;
+		List<Coordenada> coordenadasAsList = coordenadaService.recuperarTodos(this.coordenadas);
+		Coordenada ultimaCoordenada = this.getUltimaCoordenada(coordenadasAsList);
+		httpRequest.getSession().setAttribute("coordenadas", new LinkedHashMap<String, Coordenada>());
+		return ultimaCoordenada;
 	}
 
 	@DELETE
 	@Path("coordenadas/")
-	@Produces(MediaType.APPLICATION_JSON) //Devuelve la ultima coordenada para que el mapa quede centrado y no se vaya a otro lado
+	@Produces(MediaType.APPLICATION_JSON) //Devuelve la anterior coordenada a la  borrada para que el mapa quede centrado y no se vaya a otro lado
 	public Coordenada eliminarCoordenada(@QueryParam("id_coordenada") String id_coordenada){
-		coordenadaService.eliminarCoordenada(id_coordenada);
-		return coordenadaService.getCoordenadasList().get(coordenadaService.getCoordenadasList().size()-1);
+		return coordenadaService.eliminarCoordenada(this.coordenadas,id_coordenada);
+	}
+	
+	private Coordenada getUltimaCoordenada(List<Coordenada> coordenadas){
+		return coordenadas.get(coordenadas.size() - 1);
+		
 	}
 }
