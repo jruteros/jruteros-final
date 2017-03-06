@@ -1,6 +1,8 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -144,13 +146,15 @@ public class RutaBean {
 	}
 
 	public String alta (){
-		Collection<Coordenada> coordenadas = (List<Coordenada>) session.get("coordenadas"+usuarioActivo.getApellido());
-		for (Coordenada coor: coordenadas) {
+		Map<String, Coordenada> coordenadasMap = (Map<String, Coordenada>) session.get("coordenadas");
+		List<Coordenada> coordenadasAsList = new ArrayList<>(coordenadasMap.values());
+		for (Coordenada coor: coordenadasAsList) {
 			ruta.agregarCoordenada(coor.getLat(), coor.getLon());
 		}
 		ruta.setUsuario(usuarioActivo);
 		rutaService.guardarRuta(ruta);
 		listaRutas = rutaService.recuperarTodas();
+		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
 		return "usuarioAdministrarRutas.xhtml";
 	}
 
