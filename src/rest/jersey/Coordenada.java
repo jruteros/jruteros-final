@@ -8,6 +8,7 @@ public class Coordenada {
 	private double lat;
 	private double lon;
 	public static int id_coordenada=1;
+	
 	public Coordenada(double lat,double lon){
 		
 		this.id=String.valueOf(id_coordenada);

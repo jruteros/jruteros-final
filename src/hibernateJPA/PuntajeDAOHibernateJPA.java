@@ -81,4 +81,32 @@ public class PuntajeDAOHibernateJPA extends GenericDAOHibernateJPA<Puntaje> impl
 		}
 		return resultado;
 	}
+
+	@Override
+	public Integer getCantidadUsuariosHicieronEstaRuta(Long idRuta) {
+		EntityManager emf = EMF.getEMF().createEntityManager();
+		List<Puntaje> resultado = null;
+		try{
+			Query consulta = emf.createQuery("select p from Puntaje p where p.ruta.id_ruta = ?1 AND p.puntuacion IS NULL");
+			consulta.setParameter(1, idRuta);
+			resultado = (List<Puntaje>) consulta.getResultList();
+		}finally {
+			emf.close();
+		}
+		return resultado.size();
+	}
+
+	@Override
+	public List<Puntaje> obtenerPuntajesDeEstaRuta(Long idRuta) {
+		EntityManager emf = EMF.getEMF().createEntityManager();
+		List<Puntaje> resultado = null;
+		try{
+			Query consulta = emf.createQuery("select p from Puntaje p where p.ruta.id_ruta = ?1 AND p.puntuacion IS NOT NULL");
+			consulta.setParameter(1, idRuta);
+			resultado = (List<Puntaje>) consulta.getResultList();
+		}finally {
+			emf.close();
+		}
+		return resultado;
+	}
 }

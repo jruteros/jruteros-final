@@ -1,5 +1,7 @@
 package servicios;
 
+import java.util.List;
+
 import clasesUtiles.DAOFactory;
 import interfacesDAO.PuntajeDAO;
 import misClases.Puntaje;
@@ -36,4 +38,16 @@ public class PuntajeService {
 		return puntajeDAO.esteUsuarioPuntuoEstaRuta(idUsuario, idRuta);
 	}
 	
+	public Integer getCantidadUsuariosHicieronEstaRuta(Long idRuta){
+		return puntajeDAO.getCantidadUsuariosHicieronEstaRuta(idRuta);
+	}
+	
+	public Double getPromedioParaEstaRuta(Long idRuta){
+		List<Puntaje> puntajes = puntajeDAO.obtenerPuntajesDeEstaRuta(idRuta);
+		Double sum = new Double(0);
+		for (Puntaje p:puntajes){
+			sum = sum + p.getPuntuacion();
+		}
+		return sum/puntajes.size();
+	}
 }

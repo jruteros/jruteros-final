@@ -58,5 +58,6 @@ public class RutaDAOHibernateJPA extends GenericDAOHibernateJPA<Ruta> implements
 		}
 		return resultado;
 	}
+
 	
 }

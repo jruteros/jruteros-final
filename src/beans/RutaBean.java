@@ -35,6 +35,8 @@ public class RutaBean {
 	private RutaService rutaService = new RutaService();
 	private PuntajeService puntajeService = new PuntajeService();
 	private Integer puntajeRuta;
+	private Integer cantidadUsuarios;
+	private Double promedio;
 	
 	
 	public RutaBean (){
@@ -166,7 +168,28 @@ public class RutaBean {
 		this.puntajeRuta = puntajeRuta;
 	}
 	
-	
+	public String verMas(Ruta ruta){
+		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
+		this.cantidadUsuarios = puntajeService.getCantidadUsuariosHicieronEstaRuta(ruta.getId_ruta());
+		this.promedio = puntajeService.getPromedioParaEstaRuta(ruta.getId_ruta());
+		return "usuarioVerMasRuta.xhtml";
+	}
+
+	public Integer getCantidadUsuarios() {
+		return cantidadUsuarios;
+	}
+
+	public void setCantidadUsuarios(Integer cantidadUsuarios) {
+		this.cantidadUsuarios = cantidadUsuarios;
+	}
+
+	public Double getPromedio() {
+		return promedio;
+	}
+
+	public void setPromedio(Double promedio) {
+		this.promedio = promedio;
+	}
 	 
 	
 }

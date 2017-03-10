@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CoordenadaService {
+import clasesUtiles.DAOFactory;
+import interfacesDAO.CoordenadaDAO;
 
-	public CoordenadaService() {
+public class CoordenadaService {
 	
+	CoordenadaDAO coordenadaDAO;
+	public CoordenadaService() {
+		coordenadaDAO = DAOFactory.getCoordenadaDAO();
 	}
 	
 	//Elimina una coordenada y devuelva la anterior (para que quede centrada)
@@ -46,6 +50,15 @@ public class CoordenadaService {
 		coordenadas.put(coordenada.getId(), coordenada);
 	}
 	
+	public List<Coordenada> recuperarCoordenadasDeLaBd(Long idRuta){
+		List<misClases.Coordenada> coordenadasDeLaBd = coordenadaDAO.recuperarTodos(idRuta);
+		List<Coordenada> coordenadas = new ArrayList<>();
+		for(misClases.Coordenada c : coordenadasDeLaBd){
+			 Coordenada coordenada = new Coordenada (c.getLatitud(),c.getLongitud());
+			 coordenadas.add(coordenada);
+		}
+		return coordenadas;
+	}
 	
 	
 }
