@@ -57,7 +57,9 @@ public class CoordenadasResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Coordenada> getCoordenadasFromBd(@PathParam("id_ruta") String idRuta) {
 		//return coordenadaService.getCoordenadasList();
-		return coordenadaService.recuperarCoordenadasDeLaBd(Long.valueOf(idRuta));
+		List<Coordenada> coordenadasDeLaBd = coordenadaService.recuperarCoordenadasDeLaBd(Long.valueOf(idRuta));
+		this.session.setAttribute("coordenadas", this.coordenadaService.convertListToMap(coordenadasDeLaBd));
+		return coordenadasDeLaBd;
 	}
 	
 	@POST

@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import javax.faces.context.FacesContext;
 
 import misClases.Ruta;
 import misClases.Usuario;
+import rest.jersey.Coordenada;
 import servicios.RutaService;
 
 public class MisRutasBean {
@@ -38,6 +40,7 @@ public class MisRutasBean {
 	
 	public String verMas(Ruta ruta){
 		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
+		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
 		return "usuarioVerMasMiRuta.xhtml";
 	}
 
@@ -48,7 +51,11 @@ public class MisRutasBean {
 	public void setRuta(Ruta ruta) {
 		this.ruta = ruta;
 	}
-
+	
+	public String editarRuta(Ruta ruta){
+		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
+		return "usuarioEditarMiRuta.xhtml";
+	}
 	
 
 }

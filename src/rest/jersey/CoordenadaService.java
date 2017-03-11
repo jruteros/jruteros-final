@@ -1,6 +1,7 @@
 package rest.jersey;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +59,16 @@ public class CoordenadaService {
 			 coordenadas.add(coordenada);
 		}
 		return coordenadas;
+	}
+	
+	public Map<String, Coordenada> convertListToMap(List<Coordenada> coordenadas){
+		 Map<String, Coordenada> coordenadasMap = new LinkedHashMap<>();
+		for (Coordenada c:coordenadas){
+			Coordenada coordenada = new Coordenada(c.getLat(), c.getLon());
+			coordenada.setId(c.getId());
+			this.agregarCoordenada(coordenadasMap, coordenada);
+		}
+		return coordenadasMap;
 	}
 	
 	

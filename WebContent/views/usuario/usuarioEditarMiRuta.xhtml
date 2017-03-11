@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/facelets/templates/defaultVista.xhtml">
+	
+	<ui:define name="menu">
+		<!-- <ui:include src="menuUsuario.xhtml" /> -->
+		<ui:include src="#{menu}" />
+	</ui:define>
+	<ui:define name="contenido">
+		
+				<h:form id="formu">
+				<fieldset>
+					<h2>Editar Ruta</h2>	
+					<div class="error">
+						<h:message for="formulario"/>
+					</div>
+					
+					<h:inputHidden id="id_ruta"  hidden="true" value="#{MisRutasBean.ruta.id_ruta}" ></h:inputHidden>
+					
+					<div>
+						<h:outputLabel id="labelNombreRuta" for="nombreRuta">Nombre de la ruta: </h:outputLabel>
+						<h:inputText id="nombreRuta" required="true" value="#{MisRutasBean.ruta.nombre}">
+						</h:inputText>
+					</div>
+					<div>
+						<h:message for="nombreRuta" />
+					</div>
+
+					<div>
+						<h:outputLabel id="labelDescripcion" for="descripcion">Descripción:</h:outputLabel>
+						<h:inputTextarea id="descripcion" required="true" value="#{MisRutasBean.ruta.descripcion}" label="Descripcion">
+						</h:inputTextarea>
+					</div>
+					<div>
+						<h:message for="descripcion" />
+					</div>
+
+					<div>
+						<h:outputLabel id="labelPrivacidad" for="privacidad">Privacidad:</h:outputLabel>
+						<h:selectOneMenu id="privacidad" value="#{MisRutasBean.ruta.privacidad.id_privacidad}" required="true">
+							<f:selectItems value="#{RutaBean.privacidades}" var="p"
+	   									itemLabel="#{p.nombre}" itemValue="#{p.id_privacidad}" />
+						</h:selectOneMenu>
+					</div>
+					<div>
+						<h:message for="privacidad" />
+					</div>
+
+					<div>
+						<h:outputLabel id="labelFormato" for="formato">Formato:</h:outputLabel>
+						<h:selectOneMenu id="formato" value="#{MisRutasBean.ruta.formato.id_formato}" required="true">
+							<f:selectItems value="#{RutaBean.formatos}" var="f"
+	   									itemLabel="#{f.nombre}" itemValue="#{f.id_formato}" />
+						</h:selectOneMenu>
+					</div>				
+					<div>
+						<h:message for="formato" />
+					</div>
+					<div>
+						<h:outputLabel id="labelFechaRealizacion" for="fechaRealizacion">Fecha de realización:</h:outputLabel>
+						<h:inputText p:type="date" id="fechaRealizacion" value="#{MisRutasBean.ruta.fecha_realizacion}">
+							<f:convertDateTime pattern="yyyy-MM-dd"/>
+						</h:inputText>
+					</div>
+					<div>
+						<h:message for="fechaRealizacion" />
+					</div>
+					
+					<div>
+						<h:outputLabel id="labelActividad" for="actividad">Actividad:</h:outputLabel>
+						<h:selectOneMenu id="actividad" value="#{MisRutasBean.ruta.actividad.id_actividad}" required="true">
+							<f:selectItems value="#{RutaBean.actividades}" var="a"
+	   									itemLabel="#{a.nombre}" itemValue="#{a.id_actividad}" />
+						</h:selectOneMenu>
+					</div>				
+					<div>
+						<h:message for="actividad" />
+					</div>
+					
+					<div>
+						<h:outputLabel id="labelDificultad" for="dificultad">Dificultad:</h:outputLabel>
+						<h:selectOneMenu id="dificultad" value="#{MisRutasBean.ruta.dificultad.id_dificultad}" required="true">
+							<f:selectItems value="#{RutaBean.dificultades}" var="d"
+	   									itemLabel="#{d.nombre}" itemValue="#{d.id_dificultad}" />
+						</h:selectOneMenu>	
+					</div>
+					<div>
+						<h:message for="dificultad" />
+					</div>
+					
+					<div>
+						<span><input type="button" value="Limpiar mapa" id="limpiarMapa"/> </span>
+						<span><input type="button" value="Rehacer" id="rehacer"/> </span>
+						<span><input type="button" value="Ir al Origen" id="ir_al_origen"/></span>
+						<span><input type="button" value="Ir al Final" id="ir_al_fin"/></span>
+					</div>
+						
+						<div id="googleMap" style="width:100%;height:400px;"></div>
+					
+					<div>
+						<h:commandButton action="#{RutaBean.alta}" id="submitAltaRuta" value="Dar de alta la ruta" />
+					</div>
+					
+				</fieldset>
+			</h:form>			
+			<a href="usuarioAdministrarRutas.xhtml" class="btn btn-default" >Volver</a>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDiuFYJX8XkPbKzDROBnOGr4hQfenJlwC4"> </script>
+	<script src="../../resources/js/usuarioEditarRuta.js"></script>	
+	</ui:define>
+</ui:composition>
