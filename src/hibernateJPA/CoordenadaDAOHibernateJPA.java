@@ -2,7 +2,10 @@ package hibernateJPA;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import clasesUtiles.EMF;
 import interfacesDAO.CoordenadaDAO;
@@ -22,4 +25,28 @@ public class CoordenadaDAOHibernateJPA extends GenericDAOHibernateJPA<Coordenada
 		List<Coordenada> resultado = (List<Coordenada>)consulta.getResultList();
 		return resultado;
 	}
+	
+	@Override
+	public void eliminarCoordenadasParaEstaRuta(Long idRuta) {
+		EntityManager em = EMF.getEMF().createEntityManager();
+		EntityTransaction tx = null;
+		try {
+			tx = em.getTransaction();
+			tx.begin();
+			Query consulta = em.createQuery("DELETE FROM Coordenada c WHERE c.ruta.id_ruta =?1");
+			consulta.setParameter(1, idRuta);
+			consulta.executeUpdate();
+			tx.commit();
+		}
+		catch (RuntimeException e) {
+			if ( tx != null && tx.isActive() ) tx.rollback();
+			throw e; // escribir en un log o mostrar un mensaje
+		}
+		finally {
+		em.close();
+		}
+		
+	}
+	
+	
 }

@@ -56,7 +56,15 @@
 					</div>	
 					<div>
 						<h:outputLabel id="labelPromedio" for="promedio">Promedio:</h:outputLabel>
-						<h:inputText id="promedio" required="true" value="#{RutaBean.promedio}" disabled="true"></h:inputText>	
+						<c:choose>
+							<c:when test="#{RutaBean.promedio eq '0'}">
+								<h:inputText id="guion" required="true" value="-" disabled="true"></h:inputText>
+							</c:when >
+							<c:otherwise>
+   								 <h:inputText id="promedio" required="true" value="#{RutaBean.promedio}" disabled="true"></h:inputText>
+  							</c:otherwise>
+						</c:choose>
+							
 					</div>				
 					<div>
 						<div>

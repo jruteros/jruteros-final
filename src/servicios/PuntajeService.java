@@ -44,10 +44,13 @@ public class PuntajeService {
 	
 	public Double getPromedioParaEstaRuta(Long idRuta){
 		List<Puntaje> puntajes = puntajeDAO.obtenerPuntajesDeEstaRuta(idRuta);
-		Double sum = new Double(0);
-		for (Puntaje p:puntajes){
-			sum = sum + p.getPuntuacion();
+		if (!puntajes.isEmpty()){
+			Double sum = new Double(0);
+			for (Puntaje p:puntajes){
+				sum = sum + p.getPuntuacion();
+			}
+			return sum/puntajes.size();
 		}
-		return sum/puntajes.size();
+		return Double.valueOf(0);
 	}
 }
