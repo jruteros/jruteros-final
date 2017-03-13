@@ -19,6 +19,8 @@
 						<h:message for="formulario"/>
 					</div>
 					
+					<h:inputHidden id="distancia"  hidden="true" value="#{RutaBean.ruta.distancia}" ></h:inputHidden>
+					
 					<div>
 						<h:outputLabel id="labelNombreRuta" for="nombreRuta">Nombre de la ruta: </h:outputLabel>
 						<h:inputText id="nombreRuta" required="true" value="#{RutaBean.ruta.nombre}">
@@ -91,12 +93,12 @@
 					</div>
 					
 					<div>
-						<div>
-							<!-- <h:commandButton action="limpiarMapa()" value="Limpiar mapa" id="limpiarMapa" /> -->
-							<input type="button" value="Limpiar mapa" id="limpiarMapa"/> 
-						</div>
-						<div id="googleMap" style="width:100%;height:400px;"></div>
+						<span><input type="button" value="Limpiar mapa" id="limpiarMapa"/> </span>
+						<span><input type="button" value="Ir al Origen" id="ir_al_origen"/></span>
+						<span><input type="button" value="Ir al Final" id="ir_al_fin"/></span>
 					</div>
+					
+						<div id="googleMap" style="width:100%;height:400px;"></div>
 					<div>
 						<h:commandButton action="#{RutaBean.alta}" id="submitAltaRuta" value="Dar de alta la ruta" />
 					</div>
@@ -106,7 +108,7 @@
 			<a href="usuarioAdministrarRutas.xhtml" class="btn btn-default" >Volver</a>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDiuFYJX8XkPbKzDROBnOGr4hQfenJlwC4"> </script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDiuFYJX8XkPbKzDROBnOGr4hQfenJlwC4&amp;sensor=false&amp;libraries=geometry"> </script>
 	<script src="../../resources/js/usuarioAltaRuta.js"></script>	
 	</ui:define>
 </ui:composition>

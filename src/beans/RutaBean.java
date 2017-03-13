@@ -2,6 +2,7 @@ package beans;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,8 @@ public class RutaBean {
 		this.formatos = DAOFactory.getFormatoDAO().recuperarTodos();
 		this.privacidades = DAOFactory.getPrivacidadDAO().recuperarTodos();
 		this.ruta = new Ruta();
+		ruta.setDistancia(Float.valueOf(0));
+		ruta.setFecha_realizacion(new Date());
 		ruta.setPrivacidad(new Privacidad());
 		ruta.setDificultad(new Dificultad());
 		ruta.setFormato(new Formato());

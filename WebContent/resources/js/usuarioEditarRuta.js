@@ -10,8 +10,8 @@ var mapProp = {
 var puntos = [];
 var map;
 var primeraVez = 0;
-var origenRuta = mapProp.center;
-var finRuta = mapProp.center;
+var origenRuta;
+var finRuta;
 
 google.maps.event.addDomListener(window, 'load', initialize);
 

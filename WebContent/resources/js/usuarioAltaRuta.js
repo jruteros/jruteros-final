@@ -9,6 +9,8 @@ var mapProp = {
 
 var puntos = [];
 var map;
+var origenRuta;
+var finRuta;
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -27,18 +29,6 @@ function initialize() {
 	obtenerMarkers();
 }
 
-// Metodo añadido por Alex e Ignacio
-function obtenerPrimerCoordenada() {
-	$.ajax({
-		dataType : "json",
-		url : myURI + "coordenadas/primerCoordenada",
-		type : "GET",
-		success : function(result) {
-			map.setCenter(new google.maps.LatLng(result.lat, result.lon));
-		}
-	});
-}
-
 // Obtiene markers y los dibuja
 function obtenerMarkers(dibujar) {
 
@@ -46,6 +36,11 @@ function obtenerMarkers(dibujar) {
 		dataType : "json",
 		url : myURI + "coordenadas",
 		success : function(result) {
+			if (result && result.length >0){
+				origenRuta = new google.maps.LatLng(result[0].lat, result[0].lon);
+				finRuta = new google.maps.LatLng(result[result.length -1].lat, result[result.length - 1].lon);
+				calcularDistancia();
+			}
 			puntos = [];
 			$.each(result, function(i, dato) {
 				dibujarMarker(dato);
@@ -141,6 +136,8 @@ function limpiarMapa() {
 			if (result =="undefined" || result == null )
 				return ;
 			mapProp.center = new google.maps.LatLng(result.lat, result.lon);
+			origenRuta = null;
+			finRuta = null;
 			$("#limpiarMapa").hide();
 			initialize();
 		}
@@ -148,6 +145,24 @@ function limpiarMapa() {
 
 }
 $('#limpiarMapa').click(limpiarMapa);
+$('#ir_al_origen').click(irAlOrigen);
+$('#ir_al_fin').click(irAlFinal);
+
+function irAlOrigen(){
+	map.setCenter(origenRuta);
+}
+
+function irAlFinal(){
+	map.setCenter(finRuta);
+}
+
+function calcularDistancia() {
+  distancia = (google.maps.geometry.spherical.computeDistanceBetween(origenRuta, finRuta) / 1000).toFixed(2);
+  $("#formu\\:distancia").val(distancia);
+  
+}
+
+
 
 function borrarMarker(id) {
 	console.log("borrar marker " + id);
