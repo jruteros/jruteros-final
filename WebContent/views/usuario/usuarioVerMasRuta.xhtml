@@ -51,6 +51,10 @@
 						<h:inputText id="dificultad" value="#{RutaBean.ruta.dificultad.nombre}" disabled="true"></h:inputText>	
 					</div>
 					<div>
+						<h:outputLabel id="labelRecorridoEnKm" for="recorrido">Recorrido en km:</h:outputLabel>
+						<h:inputText id="recorridoEnKm" value="#{RutaBean.ruta.distancia}" disabled="true"></h:inputText>
+					</div>
+					<div>
 						<h:outputLabel id="labelCantidadUsuarios" for="cantidadUsuarios">Cantidad de Usuarios que hicieron esta ruta:</h:outputLabel>
 						<h:inputText id="cantidadUsuarios" value="#{RutaBean.cantidadUsuarios}" disabled="true"></h:inputText>	
 					</div>	

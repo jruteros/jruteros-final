@@ -61,7 +61,7 @@ function irAlFinal(){
 }
 
 function calcularDistancia() {
-	  distancia = (google.maps.geometry.spherical.computeDistanceBetween(origenRuta, finRuta) / 1000).toFixed(2);
+	  var distancia = (google.maps.geometry.spherical.computeDistanceBetween(origenRuta, finRuta) / 1000).toFixed(2);
 	  $("#formu\\:distancia").val(distancia);
 	  
 }
