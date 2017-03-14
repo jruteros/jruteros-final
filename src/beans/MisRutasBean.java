@@ -54,7 +54,14 @@ public class MisRutasBean {
 	
 	public String verMas(Ruta ruta){
 		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
-		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
+		Map<String,Coordenada> coordenadas = (Map<String, Coordenada>) session.get("coordenadas");
+		if (coordenadas == null)
+			coordenadas = new LinkedHashMap<String,Coordenada>();
+		coordenadas.clear();
+		for (misClases.Coordenada c: ruta.getCoordenadas()) {
+			coordenadas.put(String.valueOf(c.getId_coordenada()), new Coordenada(c.getLatitud(), c.getLongitud()));
+		}
+		session.put("coordenadas", coordenadas);
 		return "usuarioVerMasMiRuta.xhtml";
 	}
 

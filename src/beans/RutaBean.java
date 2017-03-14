@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
+
 import clasesUtiles.DAOFactory;
 import misClases.Actividad;
 import misClases.Dificultad;
@@ -19,6 +20,7 @@ import misClases.Ruta;
 import misClases.Usuario;
 import rest.jersey.Coordenada;
 import servicios.ActividadService;
+import servicios.CoordenadaBeanService;
 import servicios.PuntajeService;
 import servicios.RutaService;
 
@@ -38,8 +40,8 @@ public class RutaBean {
 	private Integer puntajeRuta;
 	private Integer cantidadUsuarios;
 	private Double promedio;
-	
-	
+	private CoordenadaBeanService coordenadaBeanService = new CoordenadaBeanService();
+
 	public RutaBean (){
 		this.actividades = new ActividadService().recuperarHabilitadas();
 		this.dificultades = DAOFactory.getDificultadDAO().recuperarTodos();
@@ -61,6 +63,34 @@ public class RutaBean {
 	public void init() {
 		
 		
+	}
+
+	public String editarRuta(Ruta ruta){
+		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
+		Map<String,Coordenada> coordenadas = (Map<String, Coordenada>) session.get("coordenadas");
+		if (coordenadas == null)
+			coordenadas = new LinkedHashMap<String,Coordenada>();
+		coordenadas.clear();
+		for (misClases.Coordenada c: ruta.getCoordenadas()) {
+			coordenadas.put(String.valueOf(c.getId_coordenada()), new Coordenada(c.getLatitud(), c.getLongitud()));
+		}
+		session.put("coordenadas", coordenadas);
+		return "usuarioEditarMiRuta.xhtml";
+	}
+
+	public String guardarEdicion(){
+		Map<String, Coordenada> coordenadasMap = (Map<String, Coordenada>) session.get("coordenadas");
+		List<Coordenada> coordenadasAsList = new ArrayList<Coordenada>(coordenadasMap.values());
+		coordenadaBeanService.eliminarCoordenadasParaEstaRuta(ruta.getId_ruta());
+		ruta.setCoordenadas(new ArrayList<misClases.Coordenada>() );
+		for (Coordenada coor: coordenadasAsList) {
+			ruta.agregarCoordenada(coor.getLat(), coor.getLon());
+		}
+		
+		this.ruta.setUsuario(usuarioActivo);
+		rutaService.actualizar(ruta);
+		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
+		return "usuarioAdministrarMisRutas.xhtml";
 	}
 	
 	public boolean esRutaPropia(Ruta ruta){
@@ -193,6 +223,36 @@ public class RutaBean {
 	public void setPromedio(Double promedio) {
 		this.promedio = promedio;
 	}
-	 
-	
+
+	public Usuario getUsuarioActivo() {
+		return usuarioActivo;
+	}
+
+	public void setUsuarioActivo(Usuario usuarioActivo) {
+		this.usuarioActivo = usuarioActivo;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	public RutaService getRutaService() {
+		return rutaService;
+	}
+
+	public void setRutaService(RutaService rutaService) {
+		this.rutaService = rutaService;
+	}
+
+	public PuntajeService getPuntajeService() {
+		return puntajeService;
+	}
+
+	public void setPuntajeService(PuntajeService puntajeService) {
+		this.puntajeService = puntajeService;
+	}
 }
