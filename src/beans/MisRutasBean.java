@@ -68,6 +68,7 @@ public class MisRutasBean {
 	
 	public String editarRuta(Ruta ruta){
 		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
+		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
 		return "usuarioEditarMiRuta.xhtml";
 	}
 	

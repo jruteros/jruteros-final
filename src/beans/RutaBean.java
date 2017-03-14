@@ -175,6 +175,7 @@ public class RutaBean {
 		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
 		this.cantidadUsuarios = puntajeService.getCantidadUsuariosHicieronEstaRuta(ruta.getId_ruta());
 		this.promedio = puntajeService.getPromedioParaEstaRuta(ruta.getId_ruta());
+		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
 		return "usuarioVerMasRuta.xhtml";
 	}
 
