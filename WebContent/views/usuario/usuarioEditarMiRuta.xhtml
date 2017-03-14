@@ -19,6 +19,8 @@
 						<h:message for="formulario"/>
 					</div>
 					
+					<h:inputHidden id="distancia"  hidden="true" value="#{MisRutasBean.ruta.distancia}" ></h:inputHidden>
+					
 					<h:inputHidden id="id_ruta"  hidden="true" value="#{MisRutasBean.ruta.id_ruta}" ></h:inputHidden>
 					
 					<div>
@@ -110,7 +112,7 @@
 			<a href="usuarioAdministrarRutas.xhtml" class="btn btn-default" >Volver</a>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDiuFYJX8XkPbKzDROBnOGr4hQfenJlwC4"> </script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDiuFYJX8XkPbKzDROBnOGr4hQfenJlwC4&amp;sensor=false&amp;libraries=geometry"> </script>
 	<script src="../../resources/js/usuarioEditarRuta.js"></script>	
 	</ui:define>
 </ui:composition>

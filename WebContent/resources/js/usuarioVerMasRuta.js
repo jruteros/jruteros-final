@@ -9,7 +9,8 @@ var mapProp = {
 
 var puntos = [];
 var map;
-var origenRuta = mapProp.center;
+var origenRuta;
+var finRuta;
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -33,7 +34,8 @@ function obtenerMarkersDeLaBd() {
 		success : function(result) {
 			if (result && result.length >0){
 				origenRuta = new google.maps.LatLng(result[0].lat, result[0].lon);
-				centrarMapa();
+				finRuta = new google.maps.LatLng(result[result.length -1].lat, result[result.length - 1].lon);
+				irAlOrigen();
 			}
 			puntos = [];
 			$.each(result, function(i, dato) {
@@ -46,10 +48,22 @@ function obtenerMarkersDeLaBd() {
 	});
 }
 
-$('#centrar').click(centrarMapa);
+$('#ir_al_origen').click(irAlOrigen);
+$('#ir_al_fin').click(irAlFinal);
 
-function centrarMapa(){
+
+function irAlOrigen(){
 	map.setCenter(origenRuta);
+}
+
+function irAlFinal(){
+	map.setCenter(finRuta);
+}
+
+function calcularDistancia() {
+	  distancia = (google.maps.geometry.spherical.computeDistanceBetween(origenRuta, finRuta) / 1000).toFixed(2);
+	  $("#formu\\:distancia").val(distancia);
+	  
 }
 
 function dibujarMarker(dato) {

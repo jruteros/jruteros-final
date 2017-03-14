@@ -40,10 +40,14 @@ function obtenerMarkers(dibujar) {
 		dataType : "json",
 		url : myURI + "coordenadas",
 		success : function(result) {
+			if (result && result.length >0){
+				origenRuta = new google.maps.LatLng(result[0].lat, result[0].lon);
+				finRuta = new google.maps.LatLng(result[result.length -1].lat, result[result.length - 1].lon);
+				calcularDistancia();
+			}
 			puntos = [];
 			$.each(result, function(i, dato) {
 				dibujarMarker(dato);
-				finRuta = new google.maps.LatLng(dato.lat, dato.lon);
 			});
 			dibujarRecorrido();
 		}
@@ -63,6 +67,7 @@ function obtenerMarkersDeLaBd() {
 				origenRuta = new google.maps.LatLng(result[0].lat, result[0].lon);
 				finRuta = new google.maps.LatLng(result[result.length -1].lat, result[result.length - 1].lon);
 				irAlOrigen();
+				calcularDistancia();
 			}
 			puntos = [];
 			$.each(result, function(i, dato) {
@@ -168,8 +173,9 @@ function limpiarMapa() {
 				return ;
 			mapProp.center = new google.maps.LatLng(result.lat, result.lon);
 			$("#limpiarMapa").hide();
-			origenRuta = mapProp.center;
-			finRuta = mapProp.center;
+			origenRuta = null;
+			finRuta = null;
+			$("#formu\\:distancia").val(0);
 			initialize();
 		}
 	});
@@ -185,6 +191,13 @@ function rehacer (){
 	$("#limpiarMapa").show();
 	initialize();
 }
+
+function calcularDistancia() {
+	  distancia = (google.maps.geometry.spherical.computeDistanceBetween(origenRuta, finRuta) / 1000).toFixed(2);
+	  $("#formu\\:distancia").val(distancia);
+	  
+	}
+
 
 function borrarMarker(id) {
 	console.log("borrar marker " + id);

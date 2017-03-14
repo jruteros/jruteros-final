@@ -32,6 +32,7 @@ public class MisRutasBean {
 		usuarioActivo = (Usuario)session.get("perfil");
 		misRutas = rutaService.recuperarTodasMisRutas(usuarioActivo.getId_perfil());
 		this.ruta = new Ruta();
+		ruta.setDistancia(Float.valueOf(0));
 		ruta.setPrivacidad(new Privacidad());
 		ruta.setDificultad(new Dificultad());
 		ruta.setFormato(new Formato());

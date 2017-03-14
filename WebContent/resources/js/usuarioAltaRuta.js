@@ -139,6 +139,7 @@ function limpiarMapa() {
 			origenRuta = null;
 			finRuta = null;
 			$("#limpiarMapa").hide();
+			$("#formu\\:distancia").val(0);
 			initialize();
 		}
 	});
@@ -161,7 +162,6 @@ function calcularDistancia() {
   $("#formu\\:distancia").val(distancia);
   
 }
-
 
 
 function borrarMarker(id) {
