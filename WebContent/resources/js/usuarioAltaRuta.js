@@ -24,14 +24,14 @@ function initialize() {
 		console.log("click");
 		agregarMarker(e.latLng);
 	});
-
 	puntos = [];
 	obtenerMarkers();
 }
 
 // Obtiene markers y los dibuja
 function obtenerMarkers(dibujar) {
-
+	var aunteUltimaRuta = finRuta;
+	
 	$.ajax({
 		dataType : "json",
 		url : myURI + "coordenadas",
@@ -39,7 +39,7 @@ function obtenerMarkers(dibujar) {
 			if (result && result.length >0){
 				origenRuta = new google.maps.LatLng(result[0].lat, result[0].lon);
 				finRuta = new google.maps.LatLng(result[result.length -1].lat, result[result.length - 1].lon);
-				calcularDistancia();
+				calcularDistancia(aunteUltimaRuta,finRuta);
 			}
 			puntos = [];
 			$.each(result, function(i, dato) {
@@ -157,9 +157,15 @@ function irAlFinal(){
 	map.setCenter(finRuta);
 }
 
-function calcularDistancia() {
-  distancia = (google.maps.geometry.spherical.computeDistanceBetween(origenRuta, finRuta) / 1000).toFixed(2);
-  $("#formu\\:distancia").val(distancia);
+function calcularDistancia(anteUltimaRuta,ultimaRuta) {
+  if(anteUltimaRuta){
+	  var distanciaParcial = parseFloat((google.maps.geometry.spherical.computeDistanceBetween(anteUltimaRuta, ultimaRuta) / 1000).toFixed(2));
+	  distanciaTotal = parseFloat((distanciaTotal + distanciaParcial).toFixed(2));
+	  $("#formu\\:distancia").val(distanciaTotal);
+	  return;
+  }
+  //Inicializo distanciaTotal
+  distanciaTotal = parseFloat("0.00");
   
 }
 
@@ -177,7 +183,7 @@ function borrarMarker(id) {
 		success : function(result) {
 			if (result =="undefined" || result == null ){
 				$("#limpiarMapa").hide();
-				return ;
+				return;
 			}
 			mapProp.center = new google.maps.LatLng(result.lat, result.lon);
 			initialize();

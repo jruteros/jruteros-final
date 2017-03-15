@@ -74,7 +74,9 @@
 				</c:forEach>
 			</tbody>
   		</table>
-  		<a href="usuarioAltaRuta.xhtml" class="btn btn-default" >Nueva Ruta</a>
+  		<h:form>
+  			<h:commandLink id="submit" action="#{RutaBean.altaRuta}" class="btn btn-default" value="Nueva Ruta" />
+  		</h:form>
 		<h:outputScript name="jqueryBootgrid/jquery.bootgrid.js" />
 	</div>
 	</ui:define>

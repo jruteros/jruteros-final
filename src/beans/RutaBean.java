@@ -166,6 +166,11 @@ public class RutaBean {
 	public Integer getPuntajeRuta() {
 		return puntajeRuta;
 	}
+	
+	public String altaRuta(){
+		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
+		return "usuarioAltaRuta.xhtml";
+	}
 
 	public void setPuntajeRuta(Integer puntajeRuta) {
 		this.puntajeRuta = puntajeRuta;
