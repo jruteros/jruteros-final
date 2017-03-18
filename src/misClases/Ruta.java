@@ -50,7 +50,7 @@ public class Ruta {
 	private Privacidad privacidad;
 	
 
-	@OneToMany(mappedBy="ruta")	
+	@OneToMany(mappedBy="ruta",cascade = CascadeType.REMOVE, orphanRemoval = true)	
 	private Collection<Puntaje> puntajes;
 	
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="ruta")

@@ -11,6 +11,8 @@ var puntos = [];
 var map;
 var origenRuta;
 var finRuta;
+var totalRecorrido;
+var distanciaTotal = parseFloat("0.00");
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -21,7 +23,6 @@ function initialize() {
 	map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
 	map.addListener('click', function(e) {
-		console.log("click");
 		agregarMarker(e.latLng);
 	});
 	puntos = [];
@@ -39,7 +40,7 @@ function obtenerMarkers(dibujar) {
 			if (result && result.length >0){
 				origenRuta = new google.maps.LatLng(result[0].lat, result[0].lon);
 				finRuta = new google.maps.LatLng(result[result.length -1].lat, result[result.length - 1].lon);
-				calcularDistancia(aunteUltimaRuta,finRuta);
+				totalRecorrido = result;
 			}
 			puntos = [];
 			$.each(result, function(i, dato) {
@@ -64,8 +65,7 @@ function dibujarMarker(dato) {
 	});
 
 	marker.addListener("rightclick", function(point) {
-		console.log("rigthclick");
-		borrarMarker(dato.id);
+		borrarMarker(dato.id,position,point);
 		marker.setMap(null);
 	});
 
@@ -139,7 +139,8 @@ function limpiarMapa() {
 			origenRuta = null;
 			finRuta = null;
 			$("#limpiarMapa").hide();
-			$("#formu\\:distancia").val(0);
+			totalRecorrido = undefined;
+			distanciaTotal = parseFloat("0.00");
 			initialize();
 		}
 	});
@@ -148,6 +149,7 @@ function limpiarMapa() {
 $('#limpiarMapa').click(limpiarMapa);
 $('#ir_al_origen').click(irAlOrigen);
 $('#ir_al_fin').click(irAlFinal);
+$("#formu\\:submit_alta_ruta").click(calcularDistancia);
 
 function irAlOrigen(){
 	map.setCenter(origenRuta);
@@ -157,21 +159,30 @@ function irAlFinal(){
 	map.setCenter(finRuta);
 }
 
-function calcularDistancia(anteUltimaRuta,ultimaRuta) {
-  if(anteUltimaRuta){
-	  var distanciaParcial = parseFloat((google.maps.geometry.spherical.computeDistanceBetween(anteUltimaRuta, ultimaRuta) / 1000).toFixed(2));
-	  distanciaTotal = parseFloat((distanciaTotal + distanciaParcial).toFixed(2));
-	  $("#formu\\:distancia").val(distanciaTotal);
-	  return;
-  }
-  //Inicializo distanciaTotal
-  distanciaTotal = parseFloat("0.00");
-  
+function sumarDistancia(coordenadaActual,coordenadaSiguiente) {
+  var distanciaParcial = parseFloat((google.maps.geometry.spherical.computeDistanceBetween(coordenadaActual, coordenadaSiguiente) / 1000).toFixed(2));
+  distanciaTotal = parseFloat((distanciaTotal + distanciaParcial).toFixed(2));
 }
 
+function calcularDistancia(){
+	if(totalRecorrido){
+		recorridoSize = totalRecorrido.length;
+		for (i = 0; i < recorridoSize-1; i++) {
+			
+			coordenadaActual =  new google.maps.LatLng(totalRecorrido[i].lat, totalRecorrido[i].lon);
+			coordenadaSiguiente =  new google.maps.LatLng(totalRecorrido[i+1].lat, totalRecorrido[i+1].lon);
+			sumarDistancia(coordenadaActual,coordenadaSiguiente);
+		}
+		$("#formu\\:distancia").val(distanciaTotal);
+	}
+		
+}
+	
 
-function borrarMarker(id) {
-	console.log("borrar marker " + id);
+
+
+function borrarMarker(id,position) {
+	
 	punto = {
 		id : id
 	};
@@ -181,11 +192,12 @@ function borrarMarker(id) {
 		url : myURI + "coordenadas?id_coordenada=" + id + "",
 		type : "DELETE",
 		success : function(result) {
+			var coordenadaActual = new google.maps.LatLng(result.lat, result.lon);
 			if (result =="undefined" || result == null ){
 				$("#limpiarMapa").hide();
 				return;
 			}
-			mapProp.center = new google.maps.LatLng(result.lat, result.lon);
+			mapProp.center = coordenadaActual;
 			initialize();
 		}
 	});
