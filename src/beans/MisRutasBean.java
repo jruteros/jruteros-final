@@ -14,7 +14,6 @@ import misClases.Privacidad;
 import misClases.Ruta;
 import misClases.Usuario;
 import rest.jersey.Coordenada;
-import rest.jersey.CoordenadaService;
 import servicios.CoordenadaBeanService;
 import servicios.RutaService;
 
@@ -84,6 +83,6 @@ public class MisRutasBean {
 		rutaService.actualizar(ruta);
 		misRutas = rutaService.recuperarTodas();
 		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
-		return "usuarioAdministrarMisRutas.xhtml";
+		return "rutaGuardada";
 	}
 }

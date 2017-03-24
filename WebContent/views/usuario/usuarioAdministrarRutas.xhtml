@@ -30,7 +30,10 @@
 						<td><h:outputText value="#{r.nombre}"/></td>
 						<td><h:outputText value="#{r.descripcion}"/></td>
 						<td><h:outputText value="#{r.actividad.nombre}"/></td>
-						<td><h:outputText value="#{r.fecha_realizacion}"/></td>
+						<td><h:outputText value="#{r.fecha_realizacion}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+							</h:outputText>
+						</td>
 						<c:choose>
 							<c:when test="#{RutaBean.yoLaHice(r) eq 'true'}">
 								<td>

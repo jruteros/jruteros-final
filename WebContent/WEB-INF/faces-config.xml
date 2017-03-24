@@ -55,6 +55,15 @@
 			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
+
+	<navigation-rule> 
+		<from-view-id>views/usuario/usuarioEditarMiRuta.xhtml</from-view-id> 
+		<navigation-case> 
+			<from-outcome>rutaGuardada</from-outcome> 
+			<to-view-id>views/usuario/usuarioAdministrarMisRutas.xhtml</to-view-id> 
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
 	
 	<navigation-rule> 
 		<from-view-id>/usuarioAdministrarRutas.xhtml</from-view-id> 

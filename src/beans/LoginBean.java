@@ -34,6 +34,9 @@ public class LoginBean {
 				context.addMessage("formu", errorUserPassword);
 				return null;
 			}
+		}else{
+			FacesMessage errorUserPassword = new FacesMessage("Usuario o contraseña incorrecta");
+			context.addMessage("formu", errorUserPassword);
 		}
 		return ret;
 	}
