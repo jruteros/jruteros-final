@@ -23,20 +23,22 @@ public class LoginBean {
 		LoginService login = new LoginService();
 		String ret = login.login(perfil);
 		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
 		if (ret!=null){
 			if (ret.contentEquals("usuarioDeshabilitado")) {
 				FacesMessage errorDeshabilitado = new FacesMessage("Usuario deshabilitado, contactese con un administrador");
 				context.addMessage("formu", errorDeshabilitado);
-				return null;
+				ret = "error";
 			}
 			if (ret.contentEquals("errorContraseña") || ret == null) {
 				FacesMessage errorUserPassword = new FacesMessage("Usuario o contraseña incorrecta");
 				context.addMessage("formu", errorUserPassword);
-				return null;
+				ret = "error";
 			}
 		}else{
 			FacesMessage errorUserPassword = new FacesMessage("Usuario o contraseña incorrecta");
 			context.addMessage("formu", errorUserPassword);
+			ret = "error";
 		}
 		return ret;
 	}

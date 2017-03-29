@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import clasesUtiles.DAOFactory;
 import misClases.Actividad;
@@ -159,8 +160,12 @@ public class RutaBean {
 		ruta.setUsuario(usuarioActivo);
 		rutaService.guardarRuta(ruta);
 		listaRutas = rutaService.recuperarTodas();
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Se ha creado una nueva ruta");
+		context.addMessage("mensaje", mensaje);
 		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
-		return "usuarioAdministrarRutas.xhtml";
+		return "listadoMisRutas";
 	}
 
 	public Integer getPuntajeRuta() {

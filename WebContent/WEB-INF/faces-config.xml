@@ -6,6 +6,20 @@
     version="2.2">
 
 	<navigation-rule> 
+		<from-view-id>index.xhtml</from-view-id> 
+		<navigation-case> 
+			<from-outcome>login</from-outcome> 
+			<to-view-id>login.xhtml</to-view-id> 
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case> 
+			<from-outcome>registrarse</from-outcome> 
+			<to-view-id>registrarse.xhtml</to-view-id> 
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule> 
 		<from-view-id>login.xhtml</from-view-id> 
 		<navigation-case> 
 			<from-outcome>LoginUsuario</from-outcome> 
@@ -15,6 +29,25 @@
 		<navigation-case> 
 			<from-outcome>LoginAdministrador</from-outcome> 
 			<to-view-id>views/admin/administradorAdminUsuarios.xhtml</to-view-id>
+			<redirect></redirect> 
+		</navigation-case>
+		<navigation-case> 
+			<from-outcome>error</from-outcome> 
+			<to-view-id>login.xhtml</to-view-id>
+			<redirect></redirect> 
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule> 
+		<from-view-id>menuAdministrador.xhtml</from-view-id> 
+		<navigation-case> 
+			<from-outcome>administradorAdminUsuarios</from-outcome> 
+			<to-view-id>views/admin/administradorAdminUsuarios.xhtml</to-view-id> 
+			<redirect></redirect>
+		</navigation-case> 
+		<navigation-case> 
+			<from-outcome>administradorAdminActividades</from-outcome> 
+			<to-view-id>views/admin/administradorAdminActividades.xhtml</to-view-id>
 			<redirect></redirect> 
 		</navigation-case>
 	</navigation-rule>
@@ -57,23 +90,59 @@
 	</navigation-rule>
 
 	<navigation-rule> 
+		<from-view-id>views/admin/administradorAdminActividades.xhtml</from-view-id> 
+		<navigation-case> 
+			<from-outcome>listadoActividades</from-outcome> 
+			<to-view-id>views/admin/administradorAdminActividades.xhtml</to-view-id> 
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule> 
 		<from-view-id>views/usuario/usuarioEditarMiRuta.xhtml</from-view-id> 
 		<navigation-case> 
-			<from-outcome>rutaGuardada</from-outcome> 
+			<from-outcome>listadoMisRutas</from-outcome> 
 			<to-view-id>views/usuario/usuarioAdministrarMisRutas.xhtml</to-view-id> 
 			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
-	
+
+	<navigation-rule> 
+		<from-view-id>views/usuario/usuarioAdministrarMisRutas.xhtml</from-view-id> 
+		<navigation-case> 
+			<from-outcome>verMas</from-outcome> 
+			<to-view-id>views/usuario/usuarioVerMasMiRuta.xhtml</to-view-id> 
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editarMiRuta</from-outcome> 
+			<to-view-id>views/usuario/usuarioEditarMiRuta.xhtml</to-view-id> 
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listadoMisRutas</from-outcome> 
+			<to-view-id>views/usuario/usuarioAdministrarMisRutas.xhtml</to-view-id> 
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<navigation-rule> 
+		<from-view-id>views/usuario/usuarioAltaRuta.xhtml</from-view-id> 
+		<navigation-case> 
+			<from-outcome>listadoMisRutas</from-outcome> 
+			<to-view-id>views/usuario/usuarioAdministrarMisRutas.xhtml</to-view-id> 
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+
 	<navigation-rule> 
 		<from-view-id>/usuarioAdministrarRutas.xhtml</from-view-id> 
 		<navigation-case> 
-			<from-outcome>altaRuta</from-outcome> 
+			<from-outcome>listadoMisRutas</from-outcome> 
 			<to-view-id>/usuarioAltaRuta.xhtml</to-view-id> 
 			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<managed-bean> 
 		<description>Login Bean</description> 
 		<managed-bean-name>LoginBean</managed-bean-name> 

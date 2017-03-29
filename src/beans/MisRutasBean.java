@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import misClases.Actividad;
@@ -47,15 +48,20 @@ public class MisRutasBean {
 		this.misRutas = misRutas;
 	}
 	
-	public void eliminarRuta (Ruta ruta){
+	public String eliminarRuta (Ruta ruta){
 		this.rutaService.eliminar(ruta);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("La ruta ha sido eliminada");
+		context.addMessage("mensaje", mensaje);
 		misRutas = rutaService.recuperarTodasMisRutas(usuarioActivo.getId_perfil());
+		return "listadoMisRutas";
 	} 
 	
 	public String verMas(Ruta ruta){
 		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
 		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
-		return "usuarioVerMasMiRuta.xhtml";
+		return "verMas";
 	}
 
 	public Ruta getRuta() {
@@ -69,7 +75,7 @@ public class MisRutasBean {
 	public String editarRuta(Ruta ruta){
 		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
 		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
-		return "usuarioEditarMiRuta.xhtml";
+		return "editarMiRuta";
 	}
 	
 	public String guardarEdicion(){
@@ -78,11 +84,15 @@ public class MisRutasBean {
 		for (Coordenada coor: coordenadasAsList) {
 			ruta.agregarCoordenada(coor.getLat(), coor.getLon());
 		}
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("La ruta ha sido modificada con éxito");
+		context.addMessage("mensaje", mensaje);
 		coordenadaBeanService.eliminarCoordenadasParaEstaRuta(this.ruta.getId_ruta());
 		this.ruta.setUsuario(usuarioActivo);
 		rutaService.actualizar(ruta);
 		misRutas = rutaService.recuperarTodas();
 		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
-		return "rutaGuardada";
+		return "listadoMisRutas";
 	}
 }

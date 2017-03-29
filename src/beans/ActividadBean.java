@@ -2,6 +2,9 @@ package beans;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import misClases.Actividad;
 import misClases.Ruta;
 import misClases.Usuario;
@@ -33,22 +36,40 @@ public class ActividadBean {
 	}
 	
 	public String guardarActividadEditada(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Se ha editado correctamente la actividad");
+		context.addMessage("mensaje", mensaje);
 		actividad.setNombre(this.nombreActividadNueva);
 		actividadService.guardarActividadEditada(actividad);
 		return "listadoActividades";
 	}
 	
 	public String guardarActividad(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Se ha dado de alta una nueva actividad");
+		context.addMessage("mensaje", mensaje);
 		actividadService.guardarActividad(actividad);
 		return "listadoActividades";
 	}
 	
-	public void habilitar (Actividad actividad){
+	public String habilitar (Actividad actividad){
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Se ha habilitado la actividad");
+		context.addMessage("mensaje", mensaje);
 		actividadService.habilitarActividad(actividad);
+		return "listadoActividades";
 	}
 	
-	public void deshabilitar (Actividad actividad){
+	public String deshabilitar (Actividad actividad){
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Se ha deshabilitado la actividad");
+		context.addMessage("mensaje", mensaje);
 		actividadService.deshabilitarActividad(actividad);
+		return "listadoActividades";
 	}
 
 	public List<Actividad> getListaActividades() {

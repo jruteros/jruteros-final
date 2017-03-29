@@ -11,6 +11,11 @@
 	</ui:define>
 	<ui:define name="contenido">
 	<div class="container">
+		<h:panelGroup rendered="#{not empty facesContext.messageList}">
+		<div class="row">
+			<div class="alert alert-success text-center"><h:outputText id="mensaje"></h:outputText><h:message for="mensaje" /></div>
+		</div>
+		</h:panelGroup>
 		<table id="grid-data-api" class="table table-striped" data-toggle="bootgrid">
 			<thead>
 				<tr>
