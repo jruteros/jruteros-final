@@ -7,6 +7,7 @@ import interfacesServicios.IUsuarioService;
 import misClases.Usuario;
 import clasesUtiles.DAOFactory;
 import clasesUtiles.RandomString;
+import clasesUtiles.SendMail;
 import clasesUtiles.Sha256;
 
 public class UsuarioService implements IUsuarioService{
@@ -61,6 +62,9 @@ public class UsuarioService implements IUsuarioService{
 			return null;
 		Sha256 hash = new Sha256();
 		String clave = RandomString.randomString(6);
+		SendMail mail = new SendMail(u.getEmail(), "Bienvenido a JRuteros "+ u.getNombre()+ ".\n\n"+
+				"Su clave de ingreso es: "+clave + ".\n Por favor, por seguridad se recomienda que la cambie.\n\n Equipo de JRuteros.");
+		mail.start();
 		u.setClave(hash.getSha256(clave));
 		if (this.alta(u)!= null){
 			return clave;
