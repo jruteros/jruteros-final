@@ -50,8 +50,12 @@ public class PerfilBean {
 			}
 			// Aquí solo llega sí ambas fueron vacías o coinciden
 			userService.modificar(usuario);
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getFlash().setKeepMessages(true);
+			FacesMessage mensaje = new FacesMessage("Se ha editado al usuario con exito");
+			context.addMessage("mensaje", mensaje);
 			session.put("usuario", usuario);
-			return "perfil.xhtml";
+			return "listadoMisRutas";
 		}catch (Exception e){
 			return null;
 		}

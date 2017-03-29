@@ -142,6 +142,15 @@
 			<redirect></redirect>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule> 
+		<from-view-id>views/usuario/usuarioEditarPerfil.xhtml</from-view-id> 
+		<navigation-case> 
+			<from-outcome>listadoMisRutas</from-outcome> 
+			<to-view-id>views/usuario/usuarioAdministrarMisRutas.xhtmll</to-view-id> 
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
 
 	<managed-bean> 
 		<description>Login Bean</description> 
