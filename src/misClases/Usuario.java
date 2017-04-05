@@ -17,7 +17,11 @@ public class Usuario extends Perfil{
 	@OneToMany(mappedBy="usuario")
 	private Collection<Puntaje> misPuntajes;
 	
-	public Usuario() { super();	}
+	public Usuario() { 
+		super();this.setHabilitado(true);	
+		this.setMisRutas(new ArrayList<Ruta>());
+		this.setMisPuntajes(new ArrayList<Puntaje>());
+	}
 	
 	public Usuario(String nombre, String apellido, String nombreUsuario, String email
 			, String clave, Integer dni, String domicilio, Sexo sexo) {
