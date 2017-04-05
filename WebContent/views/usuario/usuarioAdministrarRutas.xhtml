@@ -11,76 +11,87 @@
 	</ui:define>
 	<ui:define name="contenido">
 	<div class="container">
-		<table id="grid-data-api" class="table table-striped" data-toggle="bootgrid">
-			<thead>
-				<tr>
-					<th data-column-id="nombreRuta" data-order="asc">Nombre de la Ruta</th>
-					<th data-column-id="descripcion" data-type="string">Descripcion</th>
-					<th data-column-id="actividad" data-type="string">Actividad</th>
-					<th data-column-id="fecha" data-type="date">Fecha</th>
-					<th data-column-id="yoLaHice" data-type="string">Yo La Hice</th>
-					<th data-column-id="puntuar" data-type="date">Puntuar</th>
-					<th data-column-id="ver+" data-formatter="ver+">Ver +</th>
-					
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="#{RutaBean.listaRutas}" var="r">
+		<div class="row">
+			<div class="col-md-12"><h2 class="text-center">Rutas públicas</h2></div>
+		</div>
+		<div class="row">
+			<h:panelGroup rendered="#{not empty facesContext.messageList}">
+			<div class="row">
+				<div class="alert alert-success text-center"><h:outputText id="mensaje"></h:outputText><h:message for="mensaje" /></div>
+			</div>
+			</h:panelGroup>
+			<table id="grid-data-api" class="table table-striped" data-toggle="bootgrid">
+				<thead>
 					<tr>
-						<td><h:outputText value="#{r.nombre}"/></td>
-						<td><h:outputText value="#{r.descripcion}"/></td>
-						<td><h:outputText value="#{r.actividad.nombre}"/></td>
-						<td><h:outputText value="#{r.fecha_realizacion}">
-								<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-							</h:outputText>
-						</td>
-						<c:choose>
-							<c:when test="#{RutaBean.yoLaHice(r) eq 'true'}">
-								<td>
-									<h:form>
-										<h:commandLink id="submit" action="#{RutaBean.marcarComoNoHecha(r)}" value="Desmarcar" />
-									</h:form>
-								</td>
-							</c:when >
-							<c:otherwise>
-   								 <td>
-									<h:form>
-										<h:commandLink id="submit" action="#{RutaBean.marcarComoHecha(r)}" value="Marcar como hecha" />
-									</h:form>
-								</td>
-  							</c:otherwise>
-						</c:choose>
+						<th data-column-id="nombreRuta" data-order="asc">Nombre de la Ruta</th>
+						<th data-column-id="descripcion" data-type="string">Descripcion</th>
+						<th data-column-id="actividad" data-type="string">Actividad</th>
+						<th data-column-id="fecha" data-type="date">Fecha</th>
+						<th data-column-id="yoLaHice" data-type="string">Yo La Hice</th>
+						<th data-column-id="puntuar" data-type="date">Puntuar</th>
+						<th data-column-id="ver+" data-formatter="ver+">Ver +</th>
 						
-						<c:choose>
-							<c:when test="#{RutaBean.yoLaPuntee(r) eq 'true'}">
-								<td>
-									<h:form>
-										<h:commandLink id="submit" action="#{RutaBean.eliminarPuntuacionDeRuta(r)}" value="Quitar puntaje" />
-									</h:form>
-								</td>
-							</c:when >
-							<c:otherwise>
-   								 <td>
-									<h:form>
-										<h:commandLink id="submit" action="#{RutaBean.puntuarRuta(r)}" value="Puntuar" />
-									</h:form>
-								</td>
-  							</c:otherwise>
-						</c:choose>
-											
-						<td>
-							<h:form>
-								<h:commandLink id="submit" action="#{RutaBean.verMas(r)}" value="Ver+" />
-							</h:form>
-						</td>
 					</tr>
-				</c:forEach>
-			</tbody>
-  		</table>
-  		<h:form>
-  			<h:commandLink id="submit" action="#{RutaBean.altaRuta}" class="btn btn-default" value="Nueva Ruta" />
-  		</h:form>
-		<h:outputScript name="jqueryBootgrid/jquery.bootgrid.js" />
+				</thead>
+				<tbody>
+					<c:forEach items="#{RutaBean.listaRutas}" var="r">
+						<tr>
+							<td><h:outputText value="#{r.nombre}"/></td>
+							<td><h:outputText value="#{r.descripcion}"/></td>
+							<td><h:outputText value="#{r.actividad.nombre}"/></td>
+							<td><h:outputText value="#{r.fecha_realizacion}">
+									<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+								</h:outputText>
+							</td>
+							<c:choose>
+								<c:when test="#{RutaBean.yoLaHice(r) eq 'true'}">
+									<td>
+										<h:form>
+											<h:commandLink id="submit" action="#{RutaBean.marcarComoNoHecha(r)}" value="Desmarcar" />
+										</h:form>
+									</td>
+								</c:when >
+								<c:otherwise>
+	   								 <td>
+										<h:form>
+											<h:commandLink id="submit" action="#{RutaBean.marcarComoHecha(r)}" value="Marcar como hecha" />
+										</h:form>
+									</td>
+	  							</c:otherwise>
+							</c:choose>
+							
+							<c:choose>
+								<c:when test="#{RutaBean.yoLaPuntee(r) eq 'true'}">
+									<td>
+										<h:form>
+											<h:commandLink id="submit" action="#{RutaBean.eliminarPuntuacionDeRuta(r)}" value="Quitar puntaje" />
+										</h:form>
+									</td>
+								</c:when >
+								<c:otherwise>
+	   								 <td>
+										<h:form>
+											<h:commandLink id="submit" action="#{RutaBean.puntuarRuta(r)}" value="Puntuar" />
+										</h:form>
+									</td>
+	  							</c:otherwise>
+							</c:choose>
+												
+							<td>
+								<h:form>
+									<h:commandLink id="submit" action="#{RutaBean.verMas(r)}" value="Ver+" />
+								</h:form>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+	  		</table>
+	  		
+	  		<h:form>
+	  			<h:commandLink id="submit" action="#{RutaBean.altaRuta}" class="btn btn-default" value="Nueva Ruta" />
+	  		</h:form>
+			<h:outputScript name="jqueryBootgrid/jquery.bootgrid.js" />
+		</div>
 	</div>
 	</ui:define>
 </ui:composition>

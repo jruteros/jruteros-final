@@ -28,7 +28,11 @@ public class RegistrarBean {
 				context.addMessage("formu", error);
 				return null;
 			}
-			return "registroExitoso.xhtml";
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getFlash().setKeepMessages(true);
+			FacesMessage mensaje = new FacesMessage("Se ha regisrado correctamente");
+			context.addMessage("mensaje", mensaje);
+			return "login";
 		}catch (Exception e){
 			return null;
 		}

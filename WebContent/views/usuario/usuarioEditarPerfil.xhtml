@@ -8,6 +8,13 @@
 		<ui:include src="#{menu}" />
 	</ui:define>
 	<ui:define name="contenido">
+		<div class="row">
+			<h:panelGroup rendered="#{not empty facesContext.messageList}">
+			<div class="row">
+				<div class="alert alert-success text-center"><h:outputText id="mensaje"></h:outputText><h:message for="mensaje" /></div>
+			</div>
+			</h:panelGroup>
+		</div>
 		<div id="login">
 			<h2>
 				<span class="fontawesome-lock"></span>Datos Perfil

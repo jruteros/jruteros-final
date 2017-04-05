@@ -7,7 +7,6 @@ import javax.faces.context.FacesContext;
 
 import misClases.Actividad;
 import misClases.Ruta;
-import misClases.Usuario;
 import servicios.ActividadService;
 import servicios.RutaService;
 

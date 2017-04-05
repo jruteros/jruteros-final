@@ -12,16 +12,15 @@
 		<ui:include src="#{menu}" />
 	</ui:define>
 	<ui:define name="contenido">
-		
-				<h:form id="formu">
+		<div id="formu">
 				<fieldset>
-					<h2>Nueva Ruta</h2>	
+					<h2>Ver ruta</h2>	
 					<div class="error">
 						<h:message for="formulario"/>
 					</div>
-					
+					<h:form id="formu">
 					<h:inputHidden id="id_ruta"  hidden="true" value="#{RutaBean.ruta.id_ruta}" ></h:inputHidden>
-					
+					</h:form>
 					<div>
 						<h:outputLabel id="labelNombreRuta" for="nombreRuta">Nombre de la ruta: </h:outputLabel>
 						<h:inputText id="nombreRuta" value="#{RutaBean.ruta.nombre}" disabled="true"></h:inputText>
@@ -69,7 +68,7 @@
   							</c:otherwise>
 						</c:choose>
 							
-					</div>				
+					</div>
 					<div>
 						<div>
 							<h:outputLabel id="recorrido" for="recorrido">Recorrido:</h:outputLabel>
@@ -82,8 +81,8 @@
 					</div>
 							
 				</fieldset>
-			</h:form>			
 			<a href="usuarioAdministrarRutas.xhtml" class="btn btn-default" >Volver</a>
+		</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDiuFYJX8XkPbKzDROBnOGr4hQfenJlwC4"> </script>

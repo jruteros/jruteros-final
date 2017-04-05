@@ -11,7 +11,7 @@ public class Actividad {
 	private Long id_actividad;
 	
 	private String nombre;
-	private boolean habilitada;
+	private boolean habilitada=true;
 	
 	public Actividad() {}
 	

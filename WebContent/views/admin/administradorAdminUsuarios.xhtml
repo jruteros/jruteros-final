@@ -12,6 +12,15 @@
 	</ui:define>
 	<ui:define name="contenido">
 	<div class="container">
+		<div class="row">
+			<div class="col-md-12"><h2 class="text-center">Administrar usuarios</h2></div>
+		</div>
+		<div class="row">
+			<h:panelGroup rendered="#{not empty facesContext.messageList}">
+			<div class="row">
+				<div class="alert alert-success text-center"><h:outputText id="mensaje"></h:outputText><h:message for="mensaje" /></div>
+			</div>
+			</h:panelGroup>
 		<table id="grid-data-api" class="table table-striped" data-toggle="bootgrid">
 			<thead>
 				<tr>
@@ -58,6 +67,7 @@
 				</c:forEach>
 			</tbody>
 	   	</table>
+	   	</div>
 		<h:outputScript name="jqueryBootgrid/jquery.bootgrid.js" />
 	</div>
 	</ui:define>

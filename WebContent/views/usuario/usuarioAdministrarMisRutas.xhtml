@@ -11,57 +11,62 @@
 	</ui:define>
 	<ui:define name="contenido">
 	<div class="container">
-		<h:panelGroup rendered="#{not empty facesContext.messageList}">
 		<div class="row">
-			<div class="alert alert-success text-center"><h:outputText id="mensaje"></h:outputText><h:message for="mensaje" /></div>
+			<div class="col-md-12"><h2 class="text-center">Mis rutas</h2></div>
 		</div>
-		</h:panelGroup>
-		<table id="grid-data-api" class="table table-striped" data-toggle="bootgrid">
-			<thead>
-				<tr>
-					<th data-column-id="nombreRuta" data-order="asc">Nombre de la Ruta</th>
-					<th data-column-id="descripcion" data-type="string">Descripcion</th>
-					<th data-column-id="actividad" data-type="string">Actividad</th>
-					<th data-column-id="fecha" data-type="date">Fecha</th>
-					<th data-column-id="editar" data-type="string">Editar</th>
-					<th data-column-id="eliminar" data-type="date">Eliminar</th>
-					<th data-column-id="ver+" data-formatter="ver+">Ver +</th>
-					
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="#{MisRutasBean.misRutas}" var="r">
+		<div class="row">
+			<h:panelGroup rendered="#{not empty facesContext.messageList}">
+			<div class="row">
+				<div class="alert alert-success text-center"><h:outputText id="mensaje"></h:outputText><h:message for="mensaje" /></div>
+			</div>
+			</h:panelGroup>
+			<table id="grid-data-api" class="table table-striped" data-toggle="bootgrid">
+				<thead>
 					<tr>
-						<td><h:outputText value="#{r.nombre}"/></td>
-						<td><h:outputText value="#{r.descripcion}"/></td>
-						<td><h:outputText value="#{r.actividad.nombre}"/></td>
-						<td><h:outputText value="#{r.fecha_realizacion}">
-								<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-							</h:outputText>
-						</td>
-						<td>
-							<h:form>
-								<h:commandLink id="submit" action="#{MisRutasBean.editarRuta(r)}" value="Editar" />
-							</h:form>
-						</td>
-						<td>
-							<h:form>
-								<h:commandLink id="submit" onclick="return confirm('¿Estás seguro que deseas eliminar la ruta?');" action="#{MisRutasBean.eliminarRuta(r)}" value="Eliminar" />
-							</h:form>
-						</td>
-										
-						<td>
-							<h:form>
-								<h:commandLink id="submit" action="#{MisRutasBean.verMas(r)}" value="Ver+" />
-							</h:form>
-						</td>
+						<th data-column-id="nombreRuta" data-order="asc">Nombre de la Ruta</th>
+						<th data-column-id="descripcion" data-type="string">Descripcion</th>
+						<th data-column-id="actividad" data-type="string">Actividad</th>
+						<th data-column-id="fecha" data-type="date">Fecha</th>
+						<th data-column-id="editar" data-type="string">Editar</th>
+						<th data-column-id="eliminar" data-type="date">Eliminar</th>
+						<th data-column-id="ver+" data-formatter="ver+">Ver +</th>
+						
 					</tr>
-				</c:forEach>
-			</tbody>
-  		</table>
-  		<h:form>
-  			<h:commandLink id="submit" action="#{RutaBean.altaRuta}" class="btn btn-default" value="Nueva Ruta" />
-  		</h:form>
+				</thead>
+				<tbody>
+					<c:forEach items="#{MisRutasBean.misRutas}" var="r">
+						<tr>
+							<td><h:outputText value="#{r.nombre}"/></td>
+							<td><h:outputText value="#{r.descripcion}"/></td>
+							<td><h:outputText value="#{r.actividad.nombre}"/></td>
+							<td><h:outputText value="#{r.fecha_realizacion}">
+									<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+								</h:outputText>
+							</td>
+							<td>
+								<h:form>
+									<h:commandLink id="submit" action="#{MisRutasBean.editarRuta(r)}" value="Editar" />
+								</h:form>
+							</td>
+							<td>
+								<h:form>
+									<h:commandLink id="submit" onclick="return confirm('¿Estás seguro que deseas eliminar la ruta?');" action="#{MisRutasBean.eliminarRuta(r)}" value="Eliminar" />
+								</h:form>
+							</td>
+											
+							<td>
+								<h:form>
+									<h:commandLink id="submit" action="#{MisRutasBean.verMas(r)}" value="Ver+" />
+								</h:form>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+	  		</table>
+	  		<h:form>
+	  			<h:commandLink id="submit" action="#{RutaBean.altaRuta}" class="btn btn-default" value="Nueva Ruta" />
+	  		</h:form>
+	  	</div>
 		<h:outputScript name="jqueryBootgrid/jquery.bootgrid.js" />
 	</div>
 	</ui:define>

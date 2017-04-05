@@ -55,7 +55,7 @@ public class PerfilBean {
 			FacesMessage mensaje = new FacesMessage("Se ha editado al usuario con exito");
 			context.addMessage("mensaje", mensaje);
 			session.put("usuario", usuario);
-			return "listadoMisRutas";
+			return "editarPerfil";
 		}catch (Exception e){
 			return null;
 		}

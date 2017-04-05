@@ -1,7 +1,6 @@
 package beans;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
 import clasesUtiles.DAOFactory;
 import misClases.Actividad;
 import misClases.Dificultad;
@@ -78,12 +78,17 @@ public class RutaBean {
 	
 	public String puntuarRuta(Ruta ruta){
 		this.ruta = rutaService.recuperar(ruta.getId_ruta());
-		return "usuarioPuntuarRuta.xhtml";
+		return "puntuar";
 	}
 	
-	public void eliminarPuntuacionDeRuta (Ruta ruta){
+	public String eliminarPuntuacionDeRuta(Ruta ruta){
 		Puntaje puntaje = puntajeService.obtenerPuntaje(usuarioActivo.getId_perfil(),ruta.getId_ruta());
 		puntajeService.eliminarPuntaje(puntaje);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Se ha eliminado la puntuacion de la ruta");
+		context.addMessage("mensaje", mensaje);
+		return "listadoRutas";
 	}
 	
 	public String guardarPuntuacionParaRuta(){
@@ -92,22 +97,38 @@ public class RutaBean {
 		puntaje.setRuta(this.ruta);
 		puntaje.setPuntuacion(this.puntajeRuta);
 		puntajeService.guardarPuntaje(puntaje);
-		return "usuarioAdministrarRutas.xhtml";
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Ha puntuado la ruta");
+		context.addMessage("mensaje", mensaje);
+		return "listadoRutas";
 	}
 	
-	public void marcarComoHecha (Ruta ruta){
+	public String marcarComoHecha (Ruta ruta){
+		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
 		if (! puntajeService.hizoEsteUsuarioEstaRuta(usuarioActivo.getId_perfil(),ruta.getId_ruta())){
 			Puntaje puntaje = new Puntaje();
-			puntaje.setRuta(ruta);
+			puntaje.setRuta(this.ruta);
 			puntaje.setUsuario(usuarioActivo);
 			puntajeService.guardarPuntaje(puntaje);
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getFlash().setKeepMessages(true);
+			FacesMessage mensaje = new FacesMessage("Se ha marcado la ruta como hecha");
+			context.addMessage("mensaje", mensaje);
+			return "listadoRutas";
 		}
-		
+		return "listadoRutas";
 	}
 	
-	public void marcarComoNoHecha(Ruta ruta){
-		Puntaje puntaje = puntajeService.obtenerPuntajeConPuntuacionNull(usuarioActivo.getId_perfil(),ruta.getId_ruta());
+	public String marcarComoNoHecha(Ruta ruta){
+		this.setRuta(rutaService.recuperar(ruta.getId_ruta()));
+		Puntaje puntaje = puntajeService.obtenerPuntajeConPuntuacionNull(usuarioActivo.getId_perfil(),this.ruta.getId_ruta());
 		puntajeService.eliminarPuntaje(puntaje);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Se ha desmarcado la ruta");
+		context.addMessage("mensaje", mensaje);
+		return "listadoRutas";
 	}
 		
 		
@@ -186,7 +207,7 @@ public class RutaBean {
 		this.cantidadUsuarios = puntajeService.getCantidadUsuariosHicieronEstaRuta(ruta.getId_ruta());
 		this.promedio = puntajeService.getPromedioParaEstaRuta(ruta.getId_ruta());
 		this.session.put("coordenadas", new LinkedHashMap<String,Coordenada>());
-		return "usuarioVerMasRuta.xhtml";
+		return "verMas";
 	}
 
 	public Integer getCantidadUsuarios() {

@@ -2,6 +2,9 @@ package beans;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import servicios.UsuarioService;
 import misClases.Usuario;
 
@@ -21,10 +24,18 @@ public class UsuarioBean {
 	}
 	
 	public void habilitar (Usuario usuario){
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Se ha habilitado al usuario");
+		context.addMessage("mensaje", mensaje);
 		usuarioService.habilitarUsuario(usuario);
 	}
 	
 	public void deshabilitar (Usuario usuario){
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		FacesMessage mensaje = new FacesMessage("Se ha deshabilitado al usuario");
+		context.addMessage("mensaje", mensaje);
 		usuarioService.deshabilitarUsuario(usuario);
 	}
 
